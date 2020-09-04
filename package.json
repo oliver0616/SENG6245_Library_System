@@ -1,0 +1,28 @@
+{
+  "name": "library_backend",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "connect-session-sequelize": "^6.0.0",
+    "express": "~4.16.0",
+    "express-session": "^1.16.2",
+    "is-empty": "^1.2.0",
+    "morgan": "~1.9.0",
+    "nodemon": "^1.19.4",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "pg": "^7.11.0",
+    "pg-promise": "^8.7.5"
+  },
+  "main": "server.js",
+  "devDependencies": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
