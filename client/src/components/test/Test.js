@@ -1,8 +1,13 @@
 import React from 'react';
 import logo from '../../logo.svg';
 import '../../App.css';
+import {testConnection} from "../api/Test"
 
 export default class Test extends React.Component {
+
+  componentDidMount() {
+    testConnection("Hey here kasdkfajkds");
+  }
 
   render() {
     return (
