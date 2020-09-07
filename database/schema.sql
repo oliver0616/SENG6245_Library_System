@@ -146,3 +146,15 @@ CREATE TABLE public."IssueForm"
 );
 
 ALTER TABLE public."IssueForm" OWNER TO admin;
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+--
+--Data for Name: Role; Type: TABLE DATA; Schema: public; Owner: admin
+--
+    INSERT INTO public."Role"
+    VALUES
+        (0,'user');
+    INSERT INTO public."Role"
+    VALUES
+        (1,'librarian');
