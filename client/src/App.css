@@ -36,3 +36,23 @@
     transform: rotate(360deg);
   }
 }
+
+/* /components/layout/landing.js */
+.background-landing {
+  position: relative;
+  background: url('./components/layout/landingBackground.jpg') no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  margin-top: -24px;
+}
+
+.container-landing{
+  margin-top: 100px;
+  text-align: center;
+  max-width: 100%;
+}
+
+.button-container-landing{
+  margin: 100px;
+}
