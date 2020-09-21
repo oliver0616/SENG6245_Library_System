@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Container, Image, Row } from 'react-bootstrap';
+import { Button, Container} from 'react-bootstrap';
 
 export default class Landing extends React.Component {
 

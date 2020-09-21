@@ -147,6 +147,33 @@ CREATE TABLE public."IssueForm"
 
 ALTER TABLE public."IssueForm" OWNER TO admin;
 
+--
+-- Name: Comment_commentid_seq; Type: SEQUENCE; Schema: public; Owner: admin
+--
+
+CREATE SEQUENCE public."Comment_commentid_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+ALTER TABLE public."Comment_commentid_seq" OWNER TO admin;
+
+--
+-- Name: Comment; Type: TABLE; Schema: public; Owner: admin
+--
+CREATE TABLE public."Comment"
+(
+    commentid bigint DEFAULT nextval('public."Comment_commentid_seq"'::regclass) NOT NULL,
+    bookid bigint NOT NULL,
+    userid bigint NOT NULL,
+    timestamp integer NOT NULL,
+    comemntText text NOT NULL
+);
+
+ALTER TABLE public."Comment" OWNER TO admin;
+
 ---------------------------------------------------------------------------------------------------------------------------------
 
 --
