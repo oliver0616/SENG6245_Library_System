@@ -43,7 +43,6 @@ router.post('/login', (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
 
-    console.log("HERE in login");
     // Find user by email
     db.any('SELECT * FROM public."User" WHERE email = $1', req.body.email)
     .then(user =>

@@ -5,7 +5,6 @@ export default class Landing extends React.Component {
 
   render() {
     return (
-        
       <div className="background-landing">
         <Container className="container-landing">
             <h1 style = {{color:"white"}}> Welcome to Online Library</h1>

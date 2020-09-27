@@ -88,10 +88,9 @@ CREATE TABLE public."Book"
     bookid bigint DEFAULT nextval('public."Book_bookid_seq"'::regclass) NOT NULL,
     name text NOT NULL,
     keywords text NOT NULL,
-    timestamp integer NOT NULL,
+    timestamp bigint NOT NULL,
     author text NOT NULL,
-    bookMetadata text,
-    downloadLocation text NOT NULL
+    bookMetadata text
 );
 
 ALTER TABLE public."Book" OWNER TO admin;

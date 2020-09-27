@@ -5,10 +5,14 @@ import setAuthToken from "./utils/setAuthToken";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css"
 
+import PrivateRoute from "./components/common/PrivateRoute";
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import Landing from "./components/layout/Landing";
+import Navigation from "./components/layout/Navigation";
 import Footer from "./components/layout/Footer";
+import Book from "./components/bookShelf/Book";
+import BookShelf from "./components/bookShelf/BookShelf";
 import Test from "./components/test/Test";
 
 
@@ -35,13 +39,22 @@ if (localStorage.jwtToken)
 class App extends Component
 {
   render() {
+    const withNavBar = () => (
+      <div>
+        <Navigation />
+        <PrivateRoute exact path="/bookshelf" component={BookShelf} />
+        <PrivateRoute exact path="/book/:id" component={Book} />
+      </div>
+    )
+    
     return (
       <Router basename={process.env.PUBLIC_URL}>
         <div className="App" style ={{backgroundColor: '#ffffff', display :'flex', flexDirection: 'column',height:"auto",minHeight:"100vh"}}>
           <Route exact path="/" component={Landing}/>
           <Route exact path="/login" component={Login}/>
           <Route exact path="/signup" component={Signup}/>
-
+          <Route exact path="/bookshelf" component={withNavBar}/>
+          <Route exact path="/book/:id" component={withNavBar}/>
           <Footer />
         </div>
       </Router>

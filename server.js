@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const session = require('express-session');
 const passport = require("passport");
 
+const book = require("./routes/book");
 const user = require("./routes/user");
 const test = require("./routes/test");
 
@@ -48,6 +49,7 @@ app.use(passport.initialize());
 //app.use(passport.session());
 
 // Routes
+app.use("/api/book", book);
 app.use("/api/user", user);
 app.use("/api/test", test);
 

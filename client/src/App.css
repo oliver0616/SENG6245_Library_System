@@ -57,7 +57,7 @@
   margin: 50px;
 }
 
-/* /components/auth/login */
+/* /components/auth/Login.js */
 .container-login {
   margin-top: 200px;
   text-align: center;
@@ -67,7 +67,7 @@
   color: white
 }
 
-/* /components/auth/signup */
+/* /components/auth/Signup.js */
 .container-signup {
   margin-top: 200px;
   text-align: center;
@@ -75,3 +75,5 @@
 .text-signup {
   color: white
 }
+
+/* /components/dashboard/Dashboard.js*/
