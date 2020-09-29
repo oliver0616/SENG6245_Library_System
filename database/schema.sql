@@ -90,7 +90,8 @@ CREATE TABLE public."Book"
     keywords text NOT NULL,
     timestamp bigint NOT NULL,
     author text NOT NULL,
-    bookMetadata text
+    bookMetadata text,
+    description text
 );
 
 ALTER TABLE public."Book" OWNER TO admin;
@@ -102,7 +103,7 @@ CREATE TABLE public."UserBookHistory"
 (
     userid bigint NOT NULL,
     bookid bigint NOT NULL,
-    timestamp integer NOT NULL
+    timestamp bigint NOT NULL
 );
 
 ALTER TABLE public."UserBookHistory" OWNER TO admin;
@@ -114,10 +115,22 @@ CREATE TABLE public."UserLikedHistory"
 (
     userid bigint NOT NULL,
     bookid bigint NOT NULL,
-    timestamp integer NOT NULL
+    timestamp bigint NOT NULL
 );
 
 ALTER TABLE public."UserLikedHistory" OWNER TO admin;
+
+--
+-- Name: UserDownloadHistory; Type: TABLE; Schema: public; Owner: admin
+--
+CREATE TABLE public."UserDownloadHistory"
+(
+    userid bigint NOT NULL,
+    bookid bigint NOT NULL,
+    timestamp bigint NOT NULL
+);
+
+ALTER TABLE public."UserDownloadHistory" OWNER TO admin;
 
 --
 -- Name: IssueForm_issueid_seq; Type: SEQUENCE; Schema: public; Owner: admin
@@ -167,7 +180,7 @@ CREATE TABLE public."Comment"
     commentid bigint DEFAULT nextval('public."Comment_commentid_seq"'::regclass) NOT NULL,
     bookid bigint NOT NULL,
     userid bigint NOT NULL,
-    timestamp integer NOT NULL,
+    timestamp bigint NOT NULL,
     comemntText text NOT NULL
 );
 

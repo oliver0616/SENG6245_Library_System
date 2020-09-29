@@ -76,4 +76,11 @@
   color: white
 }
 
-/* /components/dashboard/Dashboard.js*/
+/* /components/bookshelf/Book.js*/
+.container-book {
+  margin-top: 60px;
+}
+
+.p-bookInfo-title {
+  font-weight: bold;
+}

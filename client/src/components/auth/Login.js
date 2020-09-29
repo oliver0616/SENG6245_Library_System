@@ -1,9 +1,7 @@
 import React from 'react';
 import { Button, Container, Form} from 'react-bootstrap';
 import { Link } from "react-router-dom";
-import axios from "axios";
 import setAuthToken from "../../utils/setAuthToken";
-import jwt_decode from "jwt-decode";
 
 import {loginUser} from "../api/UserApi";
 

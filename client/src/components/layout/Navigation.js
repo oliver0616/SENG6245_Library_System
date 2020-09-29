@@ -16,11 +16,11 @@ export default class Navigation extends React.Component {
     render(){
         return(
             <Navbar bg= "dark" expand="lg" variant="dark">
-            <Navbar.Brand href="/dashboard">OnlineLibrary</Navbar.Brand>
+            <Navbar.Brand href="/bookshelf">OnlineLibrary</Navbar.Brand>
             <Form inline  className="form-nav">
                 <FormControl type="text"/>
             </Form>
-            <Button type="submit">Search</Button>
+            <Button type="submit" style={{marginLeft:"10px"}}>Search</Button>
             <Nav className="ml-auto">
                 <Nav.Link className="link-nav" href="/bookshelf">BookShelf</Nav.Link>
                 <Nav.Link className="link-nav" href="/dashboard">Dashboard</Nav.Link>

@@ -13,6 +13,7 @@ import Navigation from "./components/layout/Navigation";
 import Footer from "./components/layout/Footer";
 import Book from "./components/bookShelf/Book";
 import BookShelf from "./components/bookShelf/BookShelf";
+import Dashboard from "./components/dashboard/Dashboard";
 import Test from "./components/test/Test";
 
 
@@ -44,6 +45,7 @@ class App extends Component
         <Navigation />
         <PrivateRoute exact path="/bookshelf" component={BookShelf} />
         <PrivateRoute exact path="/book/:id" component={Book} />
+        <PrivateRoute exact path="/dashboard" component={Dashboard} />
       </div>
     )
     
@@ -55,6 +57,7 @@ class App extends Component
           <Route exact path="/signup" component={Signup}/>
           <Route exact path="/bookshelf" component={withNavBar}/>
           <Route exact path="/book/:id" component={withNavBar}/>
+          <Route exact path="/dashboard" component={withNavBar}/>
           <Footer />
         </div>
       </Router>
