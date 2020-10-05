@@ -25,8 +25,12 @@ if (localStorage.jwtToken)
   setAuthToken(token);
   // Decode token and get user info and exp
   const decoded = jwt_decode(token);
+  console.log(decoded);
   // Check for expired token
   const currentTime = Date.now() / 1000; // to get in milliseconds
+  console.log(currentTime)
+  console.log(decoded.exp)
+  console.log(decoded.exp < currentTime)
   if(decoded.exp < currentTime)
   {
     // Logout user

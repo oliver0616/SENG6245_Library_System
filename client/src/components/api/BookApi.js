@@ -15,6 +15,11 @@ export function checkLikeBook(bookId) {
     return axios.post("/api/history/checkLikeBook", bookId);
 }
 
+// Get all like history for this user
+export function getLikeHistory(userId) {
+    return axios.post("/api/history/getLikeHistory", userId);
+}
+
 // Like a book, given userId and bookId
 export function likeBook(likeData) {
     return axios.post("/api/history/likeBook", likeData);
@@ -25,6 +30,11 @@ export function removeLikeBook(likeData) {
     return axios.post("/api/history/removeLikeBook", likeData);
 }
 
+// Get all download history for this user
+export function getDownloadHistory(userId) {
+    return axios.post("/api/history/getDownloadHistory", userId);
+}
+
 // Add download history record
 export function addDownloadRecord(userData) {
     return axios.post("/api/history/addDownloadHistory", userData);
@@ -32,7 +42,7 @@ export function addDownloadRecord(userData) {
 
 // Get all view history for this user
 export function getViewHistory(userId) {
-    return axios.post("/api/history/getViewHistory", userId)
+    return axios.post("/api/history/getViewHistory", userId);
 }
 
 // Add/Update view book history
