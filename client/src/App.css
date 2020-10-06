@@ -76,11 +76,16 @@
   color: white
 }
 
-/* /components/bookshelf/Book.js*/
+/* /components/bookshelf/Book.js */
 .container-book {
   margin-top: 60px;
 }
 
 .p-bookInfo-title {
   font-weight: bold;
+}
+
+/* /components/search/SearchPage.js */
+.conatiner-searchResult {
+  margin-top: 60px;
 }

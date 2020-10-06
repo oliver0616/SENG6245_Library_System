@@ -14,6 +14,7 @@ import Footer from "./components/layout/Footer";
 import Book from "./components/bookShelf/Book";
 import BookShelf from "./components/bookShelf/BookShelf";
 import Dashboard from "./components/dashboard/Dashboard";
+import SearchPage from "./components/search/SearchPage";
 import Test from "./components/test/Test";
 
 
@@ -25,12 +26,8 @@ if (localStorage.jwtToken)
   setAuthToken(token);
   // Decode token and get user info and exp
   const decoded = jwt_decode(token);
-  console.log(decoded);
   // Check for expired token
   const currentTime = Date.now() / 1000; // to get in milliseconds
-  console.log(currentTime)
-  console.log(decoded.exp)
-  console.log(decoded.exp < currentTime)
   if(decoded.exp < currentTime)
   {
     // Logout user
@@ -50,6 +47,7 @@ class App extends Component
         <PrivateRoute exact path="/bookshelf" component={BookShelf} />
         <PrivateRoute exact path="/book/:id" component={Book} />
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
+        <PrivateRoute exact path="/searchpage" component={SearchPage} />
       </div>
     )
     
@@ -62,6 +60,7 @@ class App extends Component
           <Route exact path="/bookshelf" component={withNavBar}/>
           <Route exact path="/book/:id" component={withNavBar}/>
           <Route exact path="/dashboard" component={withNavBar}/>
+          <Route exact path="/searchpage" component={withNavBar}/>
           <Footer />
         </div>
       </Router>

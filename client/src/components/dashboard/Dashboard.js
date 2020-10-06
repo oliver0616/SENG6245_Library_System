@@ -8,7 +8,7 @@ import {getViewHistory, getLikeHistory, getDownloadHistory} from "../api/BookApi
 export default class Dashboard extends React.Component {
     constructor() {
         super();
-        this.state={
+        this.state = {
             userName: "",
             currentTabKey:"viewHistory",
             viewHistory: [],
@@ -67,7 +67,6 @@ export default class Dashboard extends React.Component {
 
     
     render() {
-        console.log(this.state);
         var viewHistory;
         var likedHistory;
         var downloadHistory;
