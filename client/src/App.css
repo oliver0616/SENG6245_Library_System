@@ -89,3 +89,8 @@
 .conatiner-searchResult {
   margin-top: 60px;
 }
+
+.div-searchBox {
+  border: black;
+  border-style: groove;
+}

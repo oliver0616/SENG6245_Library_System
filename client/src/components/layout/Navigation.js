@@ -22,6 +22,7 @@ class Navigation extends React.Component {
             pathname:"/searchPage",
             state: { searchText: e.target.searchText.value }
         });
+        window.location.reload(false);
     }
 
     render(){
