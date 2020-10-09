@@ -8,6 +8,7 @@ import "./App.css"
 import PrivateRoute from "./components/common/PrivateRoute";
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
+import ChangePassword from "./components/auth/ChangePassword";
 import Landing from "./components/layout/Landing";
 import Navigation from "./components/layout/Navigation";
 import Footer from "./components/layout/Footer";
@@ -48,6 +49,7 @@ class App extends Component
         <PrivateRoute exact path="/book/:id" component={Book} />
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
         <PrivateRoute exact path="/searchpage" component={SearchPage} />
+        <PrivateRoute exact path="/changepassword" component={ChangePassword} />
       </div>
     )
     
@@ -57,6 +59,7 @@ class App extends Component
           <Route exact path="/" component={Landing}/>
           <Route exact path="/login" component={Login}/>
           <Route exact path="/signup" component={Signup}/>
+          <Route exact path="/changepassword" component={withNavBar}/>
           <Route exact path="/bookshelf" component={withNavBar}/>
           <Route exact path="/book/:id" component={withNavBar}/>
           <Route exact path="/dashboard" component={withNavBar}/>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container, Table, Image, Tabs, Tab} from 'react-bootstrap';
+import {Container, Table, Image, Tabs, Tab, Button, Row, Col, Modal} from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 
@@ -16,7 +16,8 @@ export default class Dashboard extends React.Component {
             likedHistory: [],
             loadingLikedHistory: true,
             downloadHistory: [],
-            loadingDownloadHistory: true
+            loadingDownloadHistory: true,
+            showDeleteWarning: false
         };
     }
 
@@ -64,6 +65,31 @@ export default class Dashboard extends React.Component {
         var estDate = new Date(dt.getTime() + offset*60*1000);
         return estDate.toString();
     }
+
+    // This method direct to change password page
+    changePassword = e => {
+        this.props.history.push("/changepassword");
+    }
+
+    // This method delete the current account
+    deleteAccount = e => {
+        console.log("delete this account");
+    }
+
+    // This method open delete account warning model
+    handleWarningOpen = e => {
+        this.setState({
+            showDeleteWarning:true
+        })
+    }
+
+    // This method close delete account warning model
+    handleWarningClose = e => {
+        this.setState({
+            showDeleteWarning:false
+        })
+    }
+
 
     
     render() {
@@ -193,6 +219,32 @@ export default class Dashboard extends React.Component {
                     </Tab>
                     <Tab eventKey="downloadHistory" title="Download History">
                         {downloadHistory}
+                    </Tab>
+                    <Tab eventKey="userSetting" title="Setting">
+                        <Container className="container-userSetting">
+                            <Col>
+                                <Row>
+                                    <Button size="lg" className="button-userSetting" onClick={this.changePassword}> Change Password </Button>
+                                </Row>
+                                <Row>
+                                    <Button size="lg" className="button-userSetting" onClick={this.handleWarningOpen}> Delete Account </Button>
+                                </Row>
+                            </Col>
+                        </Container>
+                        <Modal show={this.state.showDeleteWarning} onHide={this.handleWarningClose}>
+                            <Modal.Header closeButton>
+                            <Modal.Title>Warning</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>You are about to delete your account!!! Are you sure you want to do this?</Modal.Body>
+                            <Modal.Footer>
+                            <Button variant="secondary" onClick={this.handleWarningClose}>
+                                No
+                            </Button>
+                            <Button variant="primary" onClick={this.deleteAccount}>
+                                Yes
+                            </Button>
+                            </Modal.Footer>
+                        </Modal>
                     </Tab>
                 </Tabs>
             </Container>

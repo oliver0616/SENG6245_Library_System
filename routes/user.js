@@ -87,4 +87,23 @@ router.post('/login', (req, res) => {
         });
 });
 
+// Description: change password
+// Route: POST /api/user/changePassword
+router.post('/changePassword', (req, res) => {
+    console.log(req.body);
+
+    // Hash password before saving in database
+    bcrypt.genSalt(10, (err, salt) =>
+    {
+        bcrypt.hash(req.body.newPassword, salt, (err, hash) =>
+        {
+            if(err) throw err;
+            db.many('UPDATE public."User" SET password = $1 WHERE userid = $2', [hash, req.body.userId])
+            .then( res.json({"message":"password updated"}))
+            .catch(err => console.log(err));
+        });
+    });
+});
+
+
 module.exports = router;
