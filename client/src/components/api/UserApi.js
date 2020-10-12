@@ -14,4 +14,8 @@ export function loginUser(userData) {
 export function changePassword(passwordData) {
     return axios.post("/api/user/changePassword", passwordData);
 }
-    
+
+// Delete current user
+export function deleteAccount(userData) {
+    return axios.post("/api/user/deleteAccount", userData);
+}  

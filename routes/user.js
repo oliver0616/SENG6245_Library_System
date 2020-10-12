@@ -90,7 +90,6 @@ router.post('/login', (req, res) => {
 // Description: change password
 // Route: POST /api/user/changePassword
 router.post('/changePassword', (req, res) => {
-    console.log(req.body);
 
     // Hash password before saving in database
     bcrypt.genSalt(10, (err, salt) =>
@@ -105,5 +104,12 @@ router.post('/changePassword', (req, res) => {
     });
 });
 
+// Description: delete current user
+// Route: POST /api/user/deleteAccount
+router.post('/deleteAccount', (req, res) => {
+    db.many('DELETE FROM public."User" WHERE userid = $1', [req.body.userId])
+    .then( res.json({"message":"user deleted"}))
+    .catch(err => console.log(err));
+});
 
 module.exports = router;

@@ -2,8 +2,10 @@ import React from 'react';
 import {Container, Table, Image, Tabs, Tab, Button, Row, Col, Modal} from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import jwt_decode from "jwt-decode";
+import setAuthToken from "../../utils/setAuthToken";
 
 import {getViewHistory, getLikeHistory, getDownloadHistory} from "../api/BookApi";
+import {deleteAccount} from "../api/UserApi";
 
 export default class Dashboard extends React.Component {
     constructor() {
@@ -17,7 +19,9 @@ export default class Dashboard extends React.Component {
             loadingLikedHistory: true,
             downloadHistory: [],
             loadingDownloadHistory: true,
-            showDeleteWarning: false
+            showDeleteWarning: false,
+            userId: null,
+            roleId: null
         };
     }
 
@@ -26,6 +30,11 @@ export default class Dashboard extends React.Component {
         const t = localStorage.getItem("jwtToken");
         const decoded = jwt_decode(t);
         const currentUserId = decoded.userid;
+        const currentRoleId = decoded.role;
+        this.setState({
+            userId: currentUserId,
+            roleId: currentRoleId
+        })
         // Fetch view history
         getViewHistory({"userId": currentUserId}).then(viewHistory => {
             this.setState({
@@ -73,7 +82,13 @@ export default class Dashboard extends React.Component {
 
     // This method delete the current account
     deleteAccount = e => {
-        console.log("delete this account");
+        deleteAccount({userId: this.state.userId}).then(res => {
+            // Remove token from local storage
+            localStorage.removeItem("jwtToken");
+            // Remove auth header for future requests
+            setAuthToken(false);
+            window.location.assign(`/login`);
+        })
     }
 
     // This method open delete account warning model
@@ -90,12 +105,22 @@ export default class Dashboard extends React.Component {
         })
     }
 
+    // This method go to addBook page
+    addBook = e => {
+        this.props.history.push("/addbook");
+    }
+
+    // This method go to signuplibrarian page
+    signupNewLibrarian = e => {
+        this.props.history.push("/signuplibrarian");
+    }
 
     
     render() {
         var viewHistory;
         var likedHistory;
         var downloadHistory;
+        var librarianSetting;
 
         if (this.state.loadingViewHistory) {
             viewHistory = (
@@ -203,6 +228,22 @@ export default class Dashboard extends React.Component {
             }
         }
 
+        if (this.state.roleId == 1) {
+            librarianSetting = (
+                <div>
+                    <Row>
+                        <Button size="lg" className="button-userSetting" onClick={this.addBook}> Add Book </Button>
+                    </Row>
+                    <Row>
+                        <Button size="lg" className="button-userSetting" onClick={this.signupNewLibrarian}> Add New Librarian </Button>
+                    </Row>
+                    <Row>
+                        <Button size="lg" className="button-userSetting" onClick={this.changePassword}> Check All Users </Button>
+                    </Row>
+                </div>
+            )
+        }
+
         return (
             <Container>
                 <h1> Hi {this.state.userName} </h1>
@@ -229,6 +270,7 @@ export default class Dashboard extends React.Component {
                                 <Row>
                                     <Button size="lg" className="button-userSetting" onClick={this.handleWarningOpen}> Delete Account </Button>
                                 </Row>
+                                {librarianSetting}
                             </Col>
                         </Container>
                         <Modal show={this.state.showDeleteWarning} onHide={this.handleWarningClose}>

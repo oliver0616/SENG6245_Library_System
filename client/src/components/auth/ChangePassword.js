@@ -39,7 +39,6 @@ export default class ChangePassword extends React.Component {
                 newPassword: password
             }
             changePassword(passwordData).then(res=> {
-                console.log(res);
             }).then(res => {
                 this.props.history.push("/dashboard");
             }).catch(res => {

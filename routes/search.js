@@ -20,7 +20,6 @@ router.post('/detailSearch', (req, res) => {
     var searchTextSet = new Set(req.body.searchText.split(" "));
 
     db.any(`SELECT * FROM public."Book"`).then(books => {
-        var splitSearchText = req.body.searchText.split(" ");
         var searchResultDict = {};
         var searchResultList = [];
         var bookCounter = 0
@@ -38,10 +37,11 @@ router.post('/detailSearch', (req, res) => {
             }
             var currentKeyDict = {}
             for (var eachWord of currentKeyList) {
-                if (currentKeyDict[eachWord.toLowerCase()] == undefined) {
-                    currentKeyDict[eachWord.toLowerCase()] = 1
+                var currentWord = eachWord.toLowerCase().replace(/\s+/g, '');
+                if (currentKeyDict[currentWord] == undefined) {
+                    currentKeyDict[currentWord] = 1
                 } else {
-                    currentKeyDict[eachWord.toLowerCase()] += 1
+                    currentKeyDict[currentWord] += 1
                 }
             }
             

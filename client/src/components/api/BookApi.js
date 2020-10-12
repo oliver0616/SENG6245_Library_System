@@ -49,3 +49,18 @@ export function getViewHistory(userId) {
 export function addUpdateViewHistory(userData) {
     return axios.post("/api/history/addUpdateViewHistory", userData);
 }
+
+// Add new book
+export function addNewBook(bookData) {
+    return axios.post("/api/book/addNewBook", bookData);
+}
+
+// Upload book cover image
+export function uploadBookCover(bookData) {
+    return axios.post("/api/book/uploadBookCover", bookData);
+}
+
+// Upload book pdf
+export function uploadBookPdf(bookData) {
+    return axios.post("/api/book/uploadBookPdf", bookData);
+}

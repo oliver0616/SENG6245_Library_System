@@ -8,12 +8,14 @@ import "./App.css"
 import PrivateRoute from "./components/common/PrivateRoute";
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
+import SignupLibrarian from "./components/auth/SignupLibrarian";
 import ChangePassword from "./components/auth/ChangePassword";
 import Landing from "./components/layout/Landing";
 import Navigation from "./components/layout/Navigation";
 import Footer from "./components/layout/Footer";
 import Book from "./components/bookShelf/Book";
 import BookShelf from "./components/bookShelf/BookShelf";
+import AddBook from "./components/bookShelf/AddBook";
 import Dashboard from "./components/dashboard/Dashboard";
 import SearchPage from "./components/search/SearchPage";
 import Test from "./components/test/Test";
@@ -47,9 +49,11 @@ class App extends Component
         <Navigation />
         <PrivateRoute exact path="/bookshelf" component={BookShelf} />
         <PrivateRoute exact path="/book/:id" component={Book} />
+        <PrivateRoute exact path="/addbook" component={AddBook} />
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
         <PrivateRoute exact path="/searchpage" component={SearchPage} />
         <PrivateRoute exact path="/changepassword" component={ChangePassword} />
+        <PrivateRoute exact path="/signuplibrarian" component={SignupLibrarian} />
       </div>
     )
     
@@ -59,9 +63,11 @@ class App extends Component
           <Route exact path="/" component={Landing}/>
           <Route exact path="/login" component={Login}/>
           <Route exact path="/signup" component={Signup}/>
+          <Route exact path="/signuplibrarian" component={withNavBar}/>
           <Route exact path="/changepassword" component={withNavBar}/>
           <Route exact path="/bookshelf" component={withNavBar}/>
           <Route exact path="/book/:id" component={withNavBar}/>
+          <Route exact path="/addbook" component={withNavBar}/>
           <Route exact path="/dashboard" component={withNavBar}/>
           <Route exact path="/searchpage" component={withNavBar}/>
           <Footer />

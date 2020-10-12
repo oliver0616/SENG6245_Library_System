@@ -31,4 +31,59 @@ router.post('/downloadBookById', (req, res) => {
     }
 });
 
+// Description: add a new book
+// Route: Post /api/book/addNewBook
+router.post('/addNewBook', (req, res) => {
+    const currentTimestamp = Math.floor(Date.now() / 1000);
+    db.any('INSERT INTO public."Book" Values (default, $1, $2, $3, $4, $5, $6) RETURNING public."Book".bookid', [req.body.bookName, req.body.keywords, currentTimestamp, req.body.authorName, "{}", req.body.description]).then(bookId => {
+        const currentBookId = bookId[0].bookid;
+        res.json({"currentBookId":currentBookId});
+    });
+
+    // const bookCover = req.files.bookCover;
+    // const pdfFile = req.files.pdfFile;
+    // console.log(req.files);
+    // bookCover.mv(`${__dirname}/books/${bookCover.name}`, function (err) {
+    //     if (err) {
+    //         console.log(err)
+    //         return res.status(500).send({ msg: "Error occured" });
+    //     }
+    // });
+    // const name = "3.jpg"
+    // bookCover.mv(`${__dirname}/../client/public/img/${name}`, function (err) {
+    //     if (err) {
+    //         console.log(err)
+    //         return res.status(500).send({ msg: "Error occured" });
+    //     }
+    // });
+});
+
+// Description: upload book cover
+// Route: Post /api/book/uploadBookCover
+router.post('/uploadBookCover', (req, res) => { 
+    const bookCover = req.files.bookCover;
+    const bookCoverName = req.body.bookId.toString()+".jpg"
+    bookCover.mv(`${__dirname}/../client/public/img/${bookCoverName}`, function (err) {
+        if (err) {
+            console.log(err)
+            return res.status(500).send({ msg: "Error occured" });
+        }
+    });
+});
+
+// Description: upload book pdf
+// Route: Post /api/book/uploadBookPdf
+router.post('/uploadBookPdf', (req, res) => { 
+    const pdfFile = req.files.pdfFile;
+    const pdfFileName = req.body.bookId.toString()+".pdf"
+
+    pdfFile.mv(`${__dirname}/books/${pdfFileName}`, function (err) {
+        if (err) {
+            console.log(err)
+            return res.status(500).send({ msg: "Error occured" });
+        }
+    });
+});
+
+
 module.exports = router;

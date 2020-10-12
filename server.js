@@ -4,6 +4,7 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const session = require('express-session');
 const passport = require("passport");
+const fileUpload = require('express-fileupload');
 
 const book = require("./routes/book");
 const user = require("./routes/user");
@@ -49,6 +50,8 @@ app.use(session({
 // Passport middleware
 app.use(passport.initialize());
 //app.use(passport.session());
+// app.use(express.static('public')); //to access the files in public folder
+app.use(fileUpload());
 
 // Routes
 app.use("/api/book", book);
