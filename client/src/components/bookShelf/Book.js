@@ -2,6 +2,7 @@ import React from 'react';
 import download from 'downloadjs';
 import {Container, Image, Row, Col, Button} from 'react-bootstrap';
 import jwt_decode from "jwt-decode";
+import { Link } from "react-router-dom";
 
 import {getBookDetail, checkLikeBook, likeBook, removeLikeBook, addDownloadRecord, addUpdateViewHistory} from "../api/BookApi";
 
@@ -11,6 +12,7 @@ export default class Book extends React.Component {
         super();
         this.state = {
             userId: "",
+            roleId: null,
             bookId: "",
             book: {},
             like: false,
@@ -25,6 +27,7 @@ export default class Book extends React.Component {
         const t = localStorage.getItem("jwtToken");
         const decoded = jwt_decode(t);
         const currentUserId = decoded.userid;
+        const currentRoleId = decoded.role;
 
         // Get the detail of current book
         getBookDetail({"bookId":currentBookId}).then(book => {
@@ -34,6 +37,7 @@ export default class Book extends React.Component {
 
             this.setState({
                 userId: currentUserId,
+                roleId: currentRoleId,
                 bookId: currentBookId,
                 book: currentBook,
                 loading: false
@@ -116,6 +120,7 @@ export default class Book extends React.Component {
             bookContent = (
                 <div>
                 <h1> {this.state.book.name} </h1>
+                    {this.state.roleId == 1 && <Link style={{float:"right"}} to= {{pathname:`/editbook/${this.state.bookId}`, book:this.state.book}}> Edit </Link>}
                     <Row style={{marginTop:"50px"}}>
                         <Col>
                             <Image src={`/img/${this.state.bookId}.jpg`} style={{maxWidth:"400px",maxHeight:"600px"}} />
@@ -124,6 +129,10 @@ export default class Book extends React.Component {
                             <Row> 
                                 <p className="p-bookInfo-title"> Book Name:&nbsp; </p> 
                                 <p> {this.state.book.name} </p>
+                            </Row>
+                            <Row> 
+                                <p className="p-bookInfo-title"> Author Name:&nbsp; </p> 
+                                <p> {this.state.book.author} </p>
                             </Row>
                             <Row> 
                                 <p className="p-bookInfo-title"> Keywords:&nbsp; </p>

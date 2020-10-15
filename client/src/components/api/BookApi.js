@@ -64,3 +64,8 @@ export function uploadBookCover(bookData) {
 export function uploadBookPdf(bookData) {
     return axios.post("/api/book/uploadBookPdf", bookData);
 }
+
+// Edit book
+export function editBook(bookData) {
+    return axios.post("/api/book/editBook", bookData);
+}

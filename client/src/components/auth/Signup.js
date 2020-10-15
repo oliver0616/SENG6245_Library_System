@@ -10,7 +10,8 @@ export default class Signup extends React.Component {
         e.preventDefault();
         const newUser = {"name": e.target.name.value,
                    "email":e.target.email.value,
-                    "password":e.target.password.value}
+                    "password":e.target.password.value,
+                    "roleId": 0}
         signupNewUser(newUser);
         this.props.history.push("/login");
     }

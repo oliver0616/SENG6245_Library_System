@@ -39,23 +39,6 @@ router.post('/addNewBook', (req, res) => {
         const currentBookId = bookId[0].bookid;
         res.json({"currentBookId":currentBookId});
     });
-
-    // const bookCover = req.files.bookCover;
-    // const pdfFile = req.files.pdfFile;
-    // console.log(req.files);
-    // bookCover.mv(`${__dirname}/books/${bookCover.name}`, function (err) {
-    //     if (err) {
-    //         console.log(err)
-    //         return res.status(500).send({ msg: "Error occured" });
-    //     }
-    // });
-    // const name = "3.jpg"
-    // bookCover.mv(`${__dirname}/../client/public/img/${name}`, function (err) {
-    //     if (err) {
-    //         console.log(err)
-    //         return res.status(500).send({ msg: "Error occured" });
-    //     }
-    // });
 });
 
 // Description: upload book cover
@@ -83,6 +66,16 @@ router.post('/uploadBookPdf', (req, res) => {
             return res.status(500).send({ msg: "Error occured" });
         }
     });
+});
+
+// Description: edit a book given bookId
+// Route: Post /api/book/editBook
+router.post('/editBook', (req, res) => {
+    db.any('UPDATE public."Book" SET name = $1, keywords = $2, author = $3, description = $4 WHERE bookid = $5', [req.body.bookName, req.body.keywords, req.body.authorName, req.body.description, req.body.bookId]).then(dbRes =>{
+        res.json({msg: "Book edit successful"});
+    }).catch(err => {
+        console.log(err);
+    })
 });
 
 

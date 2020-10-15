@@ -19,3 +19,8 @@ export function changePassword(passwordData) {
 export function deleteAccount(userData) {
     return axios.post("/api/user/deleteAccount", userData);
 }  
+
+// List all user
+export function listAllUser() {
+    return axios.post("/api/user/listAllUser");
+}

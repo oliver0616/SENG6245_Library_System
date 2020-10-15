@@ -115,6 +115,11 @@ export default class Dashboard extends React.Component {
         this.props.history.push("/signuplibrarian");
     }
 
+    // This method redirect the page to AllUser
+    listAllUser = e => {
+        this.props.history.push("/alluser");
+    }
+
     
     render() {
         var viewHistory;
@@ -238,7 +243,7 @@ export default class Dashboard extends React.Component {
                         <Button size="lg" className="button-userSetting" onClick={this.signupNewLibrarian}> Add New Librarian </Button>
                     </Row>
                     <Row>
-                        <Button size="lg" className="button-userSetting" onClick={this.changePassword}> Check All Users </Button>
+                        <Button size="lg" className="button-userSetting" onClick={this.listAllUser}> Check All Users </Button>
                     </Row>
                 </div>
             )
@@ -268,7 +273,7 @@ export default class Dashboard extends React.Component {
                                     <Button size="lg" className="button-userSetting" onClick={this.changePassword}> Change Password </Button>
                                 </Row>
                                 <Row>
-                                    <Button size="lg" className="button-userSetting" onClick={this.handleWarningOpen}> Delete Account </Button>
+                                    {this.state.userId!=="0"&&<Button size="lg" className="button-userSetting" onClick={this.handleWarningOpen}> Delete Account </Button>}
                                 </Row>
                                 {librarianSetting}
                             </Col>

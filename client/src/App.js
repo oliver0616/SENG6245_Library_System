@@ -15,8 +15,10 @@ import Navigation from "./components/layout/Navigation";
 import Footer from "./components/layout/Footer";
 import Book from "./components/bookShelf/Book";
 import BookShelf from "./components/bookShelf/BookShelf";
+import EditBook from "./components/bookShelf/EditBook";
 import AddBook from "./components/bookShelf/AddBook";
 import Dashboard from "./components/dashboard/Dashboard";
+import AllUser from "./components/dashboard/AllUser";
 import SearchPage from "./components/search/SearchPage";
 import Test from "./components/test/Test";
 
@@ -49,8 +51,10 @@ class App extends Component
         <Navigation />
         <PrivateRoute exact path="/bookshelf" component={BookShelf} />
         <PrivateRoute exact path="/book/:id" component={Book} />
+        <PrivateRoute exact path="/editbook/:id" component={EditBook} />
         <PrivateRoute exact path="/addbook" component={AddBook} />
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
+        <PrivateRoute exact path="/alluser" component={AllUser} />
         <PrivateRoute exact path="/searchpage" component={SearchPage} />
         <PrivateRoute exact path="/changepassword" component={ChangePassword} />
         <PrivateRoute exact path="/signuplibrarian" component={SignupLibrarian} />
@@ -67,8 +71,10 @@ class App extends Component
           <Route exact path="/changepassword" component={withNavBar}/>
           <Route exact path="/bookshelf" component={withNavBar}/>
           <Route exact path="/book/:id" component={withNavBar}/>
+          <Route exact path="/editbook/:id" component={withNavBar}/>
           <Route exact path="/addbook" component={withNavBar}/>
           <Route exact path="/dashboard" component={withNavBar}/>
+          <Route exact path="/alluser"component={withNavBar}/>
           <Route exact path="/searchpage" component={withNavBar}/>
           <Footer />
         </div>

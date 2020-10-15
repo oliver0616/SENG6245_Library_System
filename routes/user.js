@@ -19,7 +19,7 @@ router.post('/signup', (req, res) => {
                 "name": req.body.name,
                 "email": req.body.email,
                 "password": req.body.password,
-                "role": 0
+                "role": req.body.roleId
             }
             // Hash password before saving in database
             bcrypt.genSalt(10, (err, salt) =>
@@ -110,6 +110,13 @@ router.post('/deleteAccount', (req, res) => {
     db.many('DELETE FROM public."User" WHERE userid = $1', [req.body.userId])
     .then( res.json({"message":"user deleted"}))
     .catch(err => console.log(err));
+});
+
+// Description: list all user
+// Route: POST /api/user/listAllUser
+router.post('/listAllUser', (req, res) => {
+    db.many('SELECT userid,displayname,email,"Role".roleid,"Role".rolename FROM public."User" LEFT JOIN public."Role" ON "User".roleid = "Role".roleid')
+    .then(dbRes => { res.json(dbRes)} )
 });
 
 module.exports = router;
