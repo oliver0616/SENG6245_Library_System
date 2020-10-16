@@ -41,10 +41,12 @@ export default class ChangePassword extends React.Component {
             changePassword(passwordData).then(res=> {
             }).then(res => {
                 this.props.history.push("/dashboard");
-            }).catch(res => {
-                this.setState({
-                    warningMessage: "something went wrong please try again"
-                })
+            }).catch(err => {
+                if(err.response.status == 500) {
+                    this.setState({
+                        warningMessage: err.response.data.dbErr
+                    })
+                }
             });
         }
     }
@@ -61,7 +63,8 @@ export default class ChangePassword extends React.Component {
                                 style = {{backgroundColor:"	#FFFFFF"}}
                                 id = "password"
                                 type="password" 
-                                placeholder="Enter New Password" 
+                                placeholder="Enter New Password"
+                                required
                             />
                         </Form.Group>
 
@@ -71,7 +74,9 @@ export default class ChangePassword extends React.Component {
                                 style = {{backgroundColor:"	#FFFFFF"}}
                                 id = "comfirmPassword"
                                 type="password" 
-                                placeholder="Confirm New Password" />
+                                placeholder="Confirm New Password"
+                                required
+                            />
                         </Form.Group>
                         <Button size="lg" type="submit">
                             Submit

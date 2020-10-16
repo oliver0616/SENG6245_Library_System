@@ -7,11 +7,18 @@ import {loginUser} from "../api/UserApi";
 
 export default class Login extends React.Component {
 
+    constructor() {
+        super();
+        this.state = {
+            errorMessage: ""
+        }
+    }
+
     onSubmit = e => {
         e.preventDefault();
         const currentUser = {"email":e.target.email.value,
                        "password":e.target.password.value}
-        loginUser(currentUser).then(res =>{
+        loginUser(currentUser).then(res => {
             // Save to localStorage
             // Set token to localStorage
             const {token} = res.data;
@@ -22,8 +29,18 @@ export default class Login extends React.Component {
             //const t = localStorage.getItem("jwtToken");
             //const decoded = jwt_decode(t);
             //console.log(decoded);
-        }).catch(err =>{
-                console.log("login error");
+        }).catch(err => {
+            if (err.response.status == 404) {
+                console.log("No such a email");
+                this.setState({
+                    errorMessage: "Email not found, please double check email address"
+                })
+            } else if(err.response.status == 400) {
+                console.log(err.response.data.passwordincorrect);
+                this.setState({
+                    errorMessage: err.response.data.passwordincorrect
+                })
+            }
         });
     }
 
@@ -33,6 +50,7 @@ export default class Login extends React.Component {
                 <Container className="container-login">
                     <h1 style = {{color:"white"}}>Login</h1>
                     <form onSubmit={this.onSubmit}>
+                        <p style={{color:"yellow"}}>{this.state.errorMessage}</p>
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label className="text-login">Email address</Form.Label>
                             <Form.Control 

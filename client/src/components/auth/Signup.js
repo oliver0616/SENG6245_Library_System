@@ -6,14 +6,35 @@ import {signupNewUser} from "../api/UserApi";
 
 export default class Signup extends React.Component {
 
+    constructor() {
+        super();
+        this.state = {
+            errorMessage: ""
+        }
+    }
+
     onSubmit = e => {
         e.preventDefault();
         const newUser = {"name": e.target.name.value,
                    "email":e.target.email.value,
                     "password":e.target.password.value,
                     "roleId": 0}
-        signupNewUser(newUser);
-        this.props.history.push("/login");
+        signupNewUser(newUser).then(res => {
+            this.props.history.push("/login");
+        }).catch(err => {
+            if(err.response.status == 400) {
+                console.log(err.response.data.email);
+                this.setState({
+                    errorMessage: err.response.data.email
+                })
+            }
+            if(err.response.status == 500) {
+                console.log(err.response.data.dbErr);
+                this.setState({
+                    errorMessage: err.response.data.dbErr
+                })
+            }
+        })
     }
 
     render() {
@@ -22,13 +43,15 @@ export default class Signup extends React.Component {
                 <Container className="container-signup">
                     <h1 style = {{color:"white"}}> Signup</h1>
                     <form onSubmit={this.onSubmit}>
+                        <p style={{color:"yellow"}}>{this.state.errorMessage}</p>
                         <Form.Group controlId="formDisplayname">
                             <Form.Label className="text-signup">Name</Form.Label>
                             <Form.Control 
                                 style = {{backgroundColor:"	#00000"}}
                                 id = "name"
                                 type="name" 
-                                placeholder="Enter Full Name" 
+                                placeholder="Enter Full Name"
+                                required
                             />
                         </Form.Group>
                         <Form.Group controlId="formBasicEmail">
@@ -36,7 +59,8 @@ export default class Signup extends React.Component {
                             <Form.Control 
                                 id = "email"
                                 type="email" 
-                                placeholder="Enter email" 
+                                placeholder="Enter email"
+                                required
                             />
                         </Form.Group>
 
@@ -45,7 +69,9 @@ export default class Signup extends React.Component {
                             <Form.Control 
                                 id = "password"
                                 type="password" 
-                                placeholder="Password" />
+                                placeholder="Password" 
+                                required
+                            />
                         </Form.Group>
                         <Form.Group>
                             <Link to="/login">Login</Link>

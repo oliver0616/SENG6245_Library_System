@@ -13,7 +13,7 @@ router.post('/signup', (req, res) => {
         if(user.length != 0)
         {
             console.log("Email already exists");
-            return res.status(400).json({email: "Email already exists"});
+            return res.status(400).json({email: "Email already exists, please try a different email address"});
         } else {
             const newUser = {
                 "name": req.body.name,
@@ -28,9 +28,12 @@ router.post('/signup', (req, res) => {
                 {
                     if(err) throw err;
                     newUser.password = hash;
-                    db.many('INSERT into public."User" ("displayname", "email", "password", "roleid") VALUES ($1,$2,$3,$4)', [newUser.name, newUser.email, newUser.password, newUser.role])
-                    .then(console.log("New user created"))
-                    .catch(err => console.log(err));
+                    db.any('INSERT INTO public."User" VALUES (default,$1,$2,$3,$4)', [newUser.name, newUser.email, newUser.password, newUser.role])
+                    .then(
+                        res.status(200).json({message: "New user created"})
+                    ).catch(err => {
+                        res.status(500).json({dbErr: "Database error occurred, please try again"})
+                    });
                 });
             });
         }
@@ -98,8 +101,8 @@ router.post('/changePassword', (req, res) => {
         {
             if(err) throw err;
             db.many('UPDATE public."User" SET password = $1 WHERE userid = $2', [hash, req.body.userId])
-            .then( res.json({"message":"password updated"}))
-            .catch(err => console.log(err));
+            .then(res.json({"message":"Password updated"}))
+            .catch(err => res.status(500).json({dbErr: "Database error occurred, please try again"}));
         });
     });
 });
@@ -108,8 +111,8 @@ router.post('/changePassword', (req, res) => {
 // Route: POST /api/user/deleteAccount
 router.post('/deleteAccount', (req, res) => {
     db.many('DELETE FROM public."User" WHERE userid = $1', [req.body.userId])
-    .then( res.json({"message":"user deleted"}))
-    .catch(err => console.log(err));
+    .then( res.json({"message":"User deleted"}))
+    .catch(err => res.status(500).json({dbErr: "Database error occurred, please try again"}));
 });
 
 // Description: list all user
