@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container, Table, Image, Tabs, Tab, Button, Row, Col, Modal} from 'react-bootstrap';
+import {Container, Table, Button, Modal} from 'react-bootstrap';
 
 import {listAllUser, deleteAccount} from "../api/UserApi";
 
