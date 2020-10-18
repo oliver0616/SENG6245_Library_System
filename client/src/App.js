@@ -20,6 +20,9 @@ import AddBook from "./components/bookShelf/AddBook";
 import Dashboard from "./components/dashboard/Dashboard";
 import AllUser from "./components/dashboard/AllUser";
 import SearchPage from "./components/search/SearchPage";
+import IssueForm from "./components/issueForm/IssueForm";
+import AllIssues from "./components/dashboard/AllIssues";
+import IssueDetail from "./components/issueForm/IssueDetail";
 import Test from "./components/test/Test";
 
 
@@ -58,6 +61,9 @@ class App extends Component
         <PrivateRoute exact path="/searchpage" component={SearchPage} />
         <PrivateRoute exact path="/changepassword" component={ChangePassword} />
         <PrivateRoute exact path="/signuplibrarian" component={SignupLibrarian} />
+        <PrivateRoute exact path="/issueform" component={IssueForm} />
+        <PrivateRoute exact path="/allissues" component={AllIssues} />
+        <PrivateRoute exact path="/issuedetail/:id" component={IssueDetail} />
       </div>
     )
     
@@ -76,6 +82,9 @@ class App extends Component
           <Route exact path="/dashboard" component={withNavBar}/>
           <Route exact path="/alluser"component={withNavBar}/>
           <Route exact path="/searchpage" component={withNavBar}/>
+          <Route exact path="/issueform" component={withNavBar}/>
+          <Route exact path="/allissues" component={withNavBar}/>
+          <Route exact path="/issuedetail/:id" component={withNavBar}/>
           <Footer />
         </div>
       </Router>

@@ -1,6 +1,6 @@
 import React from 'react';
 import download from 'downloadjs';
-import {Container, Image, Row, Col, Button} from 'react-bootstrap';
+import {Container, Image, Row, Col, Button, Form} from 'react-bootstrap';
 import jwt_decode from "jwt-decode";
 import { Link } from "react-router-dom";
 
@@ -113,6 +113,10 @@ export default class Book extends React.Component {
         }
     }
 
+    onSubmit = e => {
+        e.preventDefault();
+    }
+
     render() {
         var bookContent;
 
@@ -176,6 +180,19 @@ export default class Book extends React.Component {
         return(
             <Container className="container-book">
                 {bookContent}
+                <div style={{marginTop:"80px"}}>
+                    <hr />
+                    <form onSubmit={this.onSubmit}>
+                        <Form.Group>
+                            <Form.Label>Leave a comment</Form.Label>
+                            <Form.Control 
+                                as="textarea" 
+                                rows="3" 
+                                id = "description"
+                            />
+                        </Form.Group>
+                    </form>
+                </div>
             </Container>
             
         )

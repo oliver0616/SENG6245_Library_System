@@ -91,6 +91,11 @@ export default class Dashboard extends React.Component {
         })
     }
 
+    // This method redirect page to submit issue
+    submitIssue = e => {
+        this.props.history.push("/issueform");
+    }
+
     // This method open delete account warning model
     handleWarningOpen = e => {
         this.setState({
@@ -118,6 +123,11 @@ export default class Dashboard extends React.Component {
     // This method redirect the page to AllUser
     listAllUser = e => {
         this.props.history.push("/alluser");
+    }
+
+    // This method reidrect the page to AllIssues
+    listAllIssues = e => {
+        this.props.history.push("/allissues");
     }
 
     
@@ -245,6 +255,9 @@ export default class Dashboard extends React.Component {
                     <Row>
                         <Button size="lg" className="button-userSetting" onClick={this.listAllUser}> Check All Users </Button>
                     </Row>
+                    <Row>
+                        <Button size="lg" className="button-userSetting" onClick={this.listAllIssues}> Check Issue Forms </Button>
+                    </Row>
                 </div>
             )
         }
@@ -274,6 +287,9 @@ export default class Dashboard extends React.Component {
                                 </Row>
                                 <Row>
                                     {this.state.userId!=="0"&&<Button size="lg" className="button-userSetting" onClick={this.handleWarningOpen}> Delete Account </Button>}
+                                </Row>
+                                <Row>
+                                    <Button size="lg" className="button-userSetting" onClick={this.submitIssue}> Submit Issue </Button>
                                 </Row>
                                 {librarianSetting}
                             </Col>

@@ -10,6 +10,7 @@ const book = require("./routes/book");
 const user = require("./routes/user");
 const history = require("./routes/history");
 const search = require("./routes/search");
+const issue = require("./routes/issue");
 const test = require("./routes/test");
 
 var app = express();
@@ -58,6 +59,7 @@ app.use("/api/book", book);
 app.use("/api/user", user);
 app.use("/api/history", history);
 app.use("/api/search", search);
+app.use("/api/issue", issue);
 app.use("/api/test", test);
 
 const port = process.env.PORT || 5000;

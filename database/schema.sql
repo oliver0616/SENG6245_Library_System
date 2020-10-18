@@ -152,8 +152,8 @@ CREATE TABLE public."IssueForm"
 (
     issueid bigint DEFAULT nextval('public."IssueForm_issueid_seq"'::regclass) NOT NULL,
     userid bigint NOT NULL,
+    title text NOT NULL,
     description text NOT NULL,
-    keywords text NOT NULL,
     priority integer
 );
 

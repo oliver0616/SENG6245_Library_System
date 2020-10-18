@@ -118,7 +118,7 @@ router.post('/deleteAccount', (req, res) => {
 // Description: list all user
 // Route: POST /api/user/listAllUser
 router.post('/listAllUser', (req, res) => {
-    db.many('SELECT userid,displayname,email,"Role".roleid,"Role".rolename FROM public."User" LEFT JOIN public."Role" ON "User".roleid = "Role".roleid')
+    db.many('SELECT userid,displayname,email,"Role".roleid,"Role".rolename FROM public."User" LEFT JOIN public."Role" ON "User".roleid = "Role".roleid ORDER BY userid')
     .then(dbRes => { res.json(dbRes)} )
 });
 
