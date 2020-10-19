@@ -79,4 +79,36 @@ router.post('/editBook', (req, res) => {
 });
 
 
+// Description: add a new comment into db
+// Route: Post /api/book/addComment
+router.post('/addComment', (req, res) => {
+    const currentTimestamp = Math.floor(Date.now() / 1000);
+    db.any('INSERT INTO public."Comment" VALUES (default,$1,$2,$3,$4)', [req.body.bookId, req.body.userId, currentTimestamp, req.body.userComment]).then(
+        res.json({msg: "Comment added"})
+    ).catch(err => {
+        console.log(err);
+    })
+});
+
+// Description: get all comments by book id
+// Route: Post /api/book/getBookCommentById
+router.post('/getBookCommentById', (req, res) => {
+    db.any('SELECT commentid, timestamp,commenttext, displayname FROM public."Comment" LEFT JOIN public."User" ON "Comment".userId = "User".userId WHERE "Comment".bookid = $1 ORDER BY timestamp DESC', [req.body.bookId]).then(comments => {
+        res.json(comments);
+    }).catch(err => {
+        console.log(err);
+    })
+});
+
+// Description: delete comment by comment id
+// Route: Post /api/book/deleteCommentById
+router.post('/deleteCommentById', (req, res) => {
+    console.log(req.body);
+    db.any('DELETE FROM public."Comment" WHERE commentid = $1', [req.body.commentId]).then(
+        res.json({msg: "comment deleted"})
+    ).catch(err => {
+        console.log(err);
+    })
+});
+
 module.exports = router;

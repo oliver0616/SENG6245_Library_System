@@ -69,3 +69,18 @@ export function uploadBookPdf(bookData) {
 export function editBook(bookData) {
     return axios.post("/api/book/editBook", bookData);
 }
+
+// Submit a comment
+export function submitComment(userComment) {
+    return axios.post("/api/book/addComment", userComment);
+}
+
+// Get all book comments belong to this book
+export function getBookCommentById(bookId) {
+    return axios.post("/api/book/getBookCommentById", bookId);
+}
+
+// Delete the comment by comment Id
+export function deleteCommentById(commentId) {
+    return axios.post("/api/book/deleteCommentById", commentId);
+}

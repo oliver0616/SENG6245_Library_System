@@ -1,10 +1,11 @@
 import React from 'react';
 import download from 'downloadjs';
-import {Container, Image, Row, Col, Button, Form} from 'react-bootstrap';
+import {Container, Image, Row, Col, Button, Form, Card} from 'react-bootstrap';
 import jwt_decode from "jwt-decode";
 import { Link } from "react-router-dom";
 
-import {getBookDetail, checkLikeBook, likeBook, removeLikeBook, addDownloadRecord, addUpdateViewHistory} from "../api/BookApi";
+import {getBookDetail, checkLikeBook, likeBook, removeLikeBook, addDownloadRecord, addUpdateViewHistory, 
+    submitComment, getBookCommentById, deleteCommentById} from "../api/BookApi";
 
 export default class Book extends React.Component {
 
@@ -17,7 +18,9 @@ export default class Book extends React.Component {
             book: {},
             like: false,
             likeText: "like",
-            loading: true
+            loading: true,
+            comments:[],
+            loadingComment: true
         };
     }
 
@@ -67,6 +70,12 @@ export default class Book extends React.Component {
         // Add/update view book history
         addUpdateViewHistory({"userId": currentUserId,"bookId": currentBookId})
         // Load comments relate to this book
+        getBookCommentById({"bookId": currentBookId}).then(comments => {
+            this.setState({
+                comments: comments.data,
+                loadingComment: false
+            })
+        })
         // optional: load rating
     }
 
@@ -112,13 +121,38 @@ export default class Book extends React.Component {
             })
         }
     }
+    
+    // This method convert unix timestamp to regular time
+    convertTimestamp(unixTime) {
+        var dt =new Date(unixTime * 1000);
+        var offset = -300;
+        var estDate = new Date(dt.getTime() + offset*60*1000);
+        return estDate.toString();
+    }
+
+    // Delete the comment
+    deleteComment(comment) {
+        deleteCommentById({commentId: comment.commentid}).then(res => {
+            window.location.reload(false);
+        })
+    }
 
     onSubmit = e => {
         e.preventDefault();
+
+        const commentData = {
+            userId: this.state.userId,
+            bookId: this.state.bookId,
+            userComment: e.target.userComment.value
+        }
+        submitComment(commentData).then(res=>{
+            window.location.reload(false);
+        })
     }
 
     render() {
         var bookContent;
+        var commentSection;
 
         if (this.state.loading == false) {
             bookContent = (
@@ -177,6 +211,29 @@ export default class Book extends React.Component {
             )
         }
 
+        if (this.state.loadingComment) {
+            commentSection = (
+                <h1> Loading Comments... </h1>
+            )
+        } else {
+            commentSection = (
+                <div>
+                    {this.state.comments.map(eachComment=> 
+                    <Card>
+                        <Card.Body>
+                        <Card.Title style={{textAlign:"left"}}>{eachComment.displayname}</Card.Title>
+                            <Card.Subtitle className="mb-2 text-muted" style={{textAlign:"left"}}>{this.convertTimestamp(eachComment.timestamp)}</Card.Subtitle>
+                            <Card.Text style={{textAlign:"left"}}>
+                                {eachComment.commenttext}
+                            </Card.Text>
+                            {this.state.roleId == 1 && <Button style={{float:"right"}} size="sm" onClick={()=>{this.deleteComment(eachComment)}}> Delete </Button>}
+                        </Card.Body>
+                    </Card>
+                    )}
+                </div>
+            )
+        }
+
         return(
             <Container className="container-book">
                 {bookContent}
@@ -188,10 +245,15 @@ export default class Book extends React.Component {
                             <Form.Control 
                                 as="textarea" 
                                 rows="3" 
-                                id = "description"
+                                id = "userComment"
                             />
                         </Form.Group>
+                        <Button type="submit">
+                            Submit
+                        </Button>
                     </form>
+                    <hr />
+                    {commentSection}
                 </div>
             </Container>
             

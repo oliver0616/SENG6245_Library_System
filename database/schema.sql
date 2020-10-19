@@ -181,7 +181,7 @@ CREATE TABLE public."Comment"
     bookid bigint NOT NULL,
     userid bigint NOT NULL,
     timestamp bigint NOT NULL,
-    comemntText text NOT NULL
+    commentText text NOT NULL
 );
 
 ALTER TABLE public."Comment" OWNER TO admin;
