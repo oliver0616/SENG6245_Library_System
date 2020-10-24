@@ -5,9 +5,9 @@ This is a online library system that provide normal library functionality. Allow
 Frontend: <br />
 react, react-bootstrap, axios <br />
 Backend: <br />
-nodejs, express
+nodejs, express <br />
 Database: <br />
-Postgresql
+Postgresql <br />
 
 ## How to setup the system
 1. Clone this repository
