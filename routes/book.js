@@ -27,7 +27,7 @@ router.post('/downloadBookById', (req, res) => {
         const file = `${__dirname}/books/${req.body.bookId}.pdf`;
         res.download(file);
     } catch (err) {
-        console.log(err);
+        return res.status(500).send({ msg: "Error occured downloading book" });
     }
 });
 
@@ -49,7 +49,7 @@ router.post('/uploadBookCover', (req, res) => {
     bookCover.mv(`${__dirname}/../client/public/img/${bookCoverName}`, function (err) {
         if (err) {
             console.log(err)
-            return res.status(500).send({ msg: "Error occured" });
+            return res.status(500).send({ msg: "Error occured upload book cover" });
         }
     });
 });
@@ -63,7 +63,7 @@ router.post('/uploadBookPdf', (req, res) => {
     pdfFile.mv(`${__dirname}/books/${pdfFileName}`, function (err) {
         if (err) {
             console.log(err)
-            return res.status(500).send({ msg: "Error occured" });
+            return res.status(500).send({ msg: "Error occured upload book pdf" });
         }
     });
 });
@@ -74,7 +74,7 @@ router.post('/editBook', (req, res) => {
     db.any('UPDATE public."Book" SET name = $1, keywords = $2, author = $3, description = $4 WHERE bookid = $5', [req.body.bookName, req.body.keywords, req.body.authorName, req.body.description, req.body.bookId]).then(dbRes =>{
         res.json({msg: "Book edit successful"});
     }).catch(err => {
-        console.log(err);
+        return res.status(500).send({ msg: "Error occured Editted Book" });
     })
 });
 
@@ -86,7 +86,7 @@ router.post('/addComment', (req, res) => {
     db.any('INSERT INTO public."Comment" VALUES (default,$1,$2,$3,$4)', [req.body.bookId, req.body.userId, currentTimestamp, req.body.userComment]).then(
         res.json({msg: "Comment added"})
     ).catch(err => {
-        console.log(err);
+        return res.status(500).send({ msg: "Error occured add new comment" });
     })
 });
 
@@ -96,7 +96,7 @@ router.post('/getBookCommentById', (req, res) => {
     db.any('SELECT commentid, timestamp,commenttext, displayname FROM public."Comment" LEFT JOIN public."User" ON "Comment".userId = "User".userId WHERE "Comment".bookid = $1 ORDER BY timestamp DESC', [req.body.bookId]).then(comments => {
         res.json(comments);
     }).catch(err => {
-        console.log(err);
+        return res.status(500).send({ msg: "Error occured get comments by book id" });
     })
 });
 
@@ -107,7 +107,7 @@ router.post('/deleteCommentById', (req, res) => {
     db.any('DELETE FROM public."Comment" WHERE commentid = $1', [req.body.commentId]).then(
         res.json({msg: "comment deleted"})
     ).catch(err => {
-        console.log(err);
+        return res.status(500).send({ msg: "Error occured deleting the comment" });
     })
 });
 

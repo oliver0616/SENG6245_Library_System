@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Container, Form} from 'react-bootstrap';
+import { store } from 'react-notifications-component';
 
 import {signupNewUser} from "../api/UserApi";
 
@@ -18,7 +19,21 @@ export default class SignupLibrarian extends React.Component {
                     "password":e.target.password.value,
                     "roleId": 1}
         signupNewUser(newLibrarian).then(res => {
-            this.props.history.push("/dashboard");
+            store.addNotification({
+                title: "Success!",
+                message: "New Librarian Created",
+                type: "success",
+                insert: "bottom",
+                container: "bottom-right",
+                animationIn: ["animate__animated", "animate__fadeIn"],
+                animationOut: ["animate__animated", "animate__fadeOut"],
+                dismiss: {
+                  duration: 5000,
+                  onScreen: true
+                }
+            });
+            document.getElementById("newLibarianForm").reset();
+            // this.props.history.push("/dashboard");
         }).catch(err => {
             if(err.response.status == 400) {
                 console.log(err.response.data.email);
@@ -39,7 +54,7 @@ export default class SignupLibrarian extends React.Component {
         return(
             <Container className="container-signup">
                 <h1> Add new Librarian</h1>
-                <form onSubmit={this.onSubmit}>
+                <form onSubmit={this.onSubmit} id="newLibarianForm">
                     <p style={{color:"red"}}>{this.state.errorMessage}</p>
                     <Form.Group controlId="formDisplayname">
                         <Form.Label>Name</Form.Label>
@@ -70,7 +85,7 @@ export default class SignupLibrarian extends React.Component {
                             required
                         />
                     </Form.Group>
-                    <Button size="lg" variant="light" type="submit">
+                    <Button size="lg" type="submit">
                         Submit
                     </Button>
                 </form>

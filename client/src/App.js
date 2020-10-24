@@ -4,6 +4,8 @@ import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css"
+import ReactNotification from 'react-notifications-component'
+import 'react-notifications-component/dist/theme.css'
 
 import PrivateRoute from "./components/common/PrivateRoute";
 import Login from "./components/auth/Login";
@@ -23,7 +25,6 @@ import SearchPage from "./components/search/SearchPage";
 import IssueForm from "./components/issueForm/IssueForm";
 import AllIssues from "./components/dashboard/AllIssues";
 import IssueDetail from "./components/issueForm/IssueDetail";
-import Test from "./components/test/Test";
 
 
 // Check for token to keep user logged in
@@ -51,6 +52,7 @@ class App extends Component
   render() {
     const withNavBar = () => (
       <div>
+        <ReactNotification />
         <Navigation />
         <PrivateRoute exact path="/bookshelf" component={BookShelf} />
         <PrivateRoute exact path="/book/:id" component={Book} />

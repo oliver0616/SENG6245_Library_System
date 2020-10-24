@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Container, Form} from 'react-bootstrap';
 import jwt_decode from "jwt-decode";
+import { store } from 'react-notifications-component';
 
 import {submitIssue} from "../api/IssueApi";
 
@@ -34,7 +35,21 @@ export default class IssueForm extends React.Component {
         };
         
         submitIssue(IssueForm).then(res=> {
-            this.props.history.push("/dashboard");
+            store.addNotification({
+                title: "Success!",
+                message: "Issue has been submitted",
+                type: "success",
+                insert: "bottom",
+                container: "bottom-right",
+                animationIn: ["animate__animated", "animate__fadeIn"],
+                animationOut: ["animate__animated", "animate__fadeOut"],
+                dismiss: {
+                  duration: 5000,
+                  onScreen: true
+                }
+              });
+              document.getElementById("issueForm").reset();
+            // this.props.history.push("/dashboard");
         }).catch(err=> {console.log(err)})
     }
 
@@ -42,7 +57,7 @@ export default class IssueForm extends React.Component {
         return (
             <Container className="container-addBook">
                 <h1 style={{margin:"25px"}}>Issue Form</h1>
-                <form onSubmit={this.onSubmit}>
+                <form onSubmit={this.onSubmit} id="issueForm">
                     <Form.Group>
                         <Form.Label>Title</Form.Label>
                         <Form.Control 

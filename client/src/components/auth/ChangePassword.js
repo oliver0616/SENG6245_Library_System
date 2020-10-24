@@ -3,6 +3,7 @@ import { Button, Container, Form} from 'react-bootstrap';
 import jwt_decode from "jwt-decode";
 
 import {changePassword} from "../api/UserApi";
+import { store } from 'react-notifications-component';
 
 export default class ChangePassword extends React.Component {
 
@@ -40,7 +41,21 @@ export default class ChangePassword extends React.Component {
             }
             changePassword(passwordData).then(res=> {
             }).then(res => {
-                this.props.history.push("/dashboard");
+                store.addNotification({
+                    title: "Success!",
+                    message: "Password has been changed",
+                    type: "success",
+                    insert: "bottom",
+                    container: "bottom-right",
+                    animationIn: ["animate__animated", "animate__fadeIn"],
+                    animationOut: ["animate__animated", "animate__fadeOut"],
+                    dismiss: {
+                      duration: 5000,
+                      onScreen: true
+                    }
+                });
+                document.getElementById("changePasswordForm").reset();
+                // this.props.history.push("/dashboard");
             }).catch(err => {
                 if(err.response.status == 500) {
                     this.setState({
@@ -55,7 +70,7 @@ export default class ChangePassword extends React.Component {
         return(
             <Container className="container-login">
                     <h1 style={{margin:"25px"}}>Change Password</h1>
-                    <form onSubmit={this.onSubmit}>
+                    <form onSubmit={this.onSubmit} id="changePasswordForm">
                         <Form.Group>
                             <p style={{color:"red"}}> {this.state.warningMessage} </p>
                             <Form.Label>New Password</Form.Label>

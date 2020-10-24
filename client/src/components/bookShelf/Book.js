@@ -216,22 +216,29 @@ export default class Book extends React.Component {
                 <h1> Loading Comments... </h1>
             )
         } else {
-            commentSection = (
-                <div>
-                    {this.state.comments.map(eachComment=> 
-                    <Card>
-                        <Card.Body>
-                        <Card.Title style={{textAlign:"left"}}>{eachComment.displayname}</Card.Title>
-                            <Card.Subtitle className="mb-2 text-muted" style={{textAlign:"left"}}>{this.convertTimestamp(eachComment.timestamp)}</Card.Subtitle>
-                            <Card.Text style={{textAlign:"left"}}>
-                                {eachComment.commenttext}
-                            </Card.Text>
-                            {this.state.roleId == 1 && <Button style={{float:"right"}} size="sm" onClick={()=>{this.deleteComment(eachComment)}}> Delete </Button>}
-                        </Card.Body>
-                    </Card>
-                    )}
-                </div>
-            )
+            if (this.state.comments.length !== 0)
+            {
+                commentSection = (
+                    <div>
+                        {this.state.comments.map(eachComment=> 
+                        <Card>
+                            <Card.Body>
+                            <Card.Title style={{textAlign:"left"}}>{eachComment.displayname}</Card.Title>
+                                <Card.Subtitle className="mb-2 text-muted" style={{textAlign:"left"}}>{this.convertTimestamp(eachComment.timestamp)}</Card.Subtitle>
+                                <Card.Text style={{textAlign:"left"}}>
+                                    {eachComment.commenttext}
+                                </Card.Text>
+                                {this.state.roleId == 1 && <Button style={{float:"right"}} size="sm" onClick={()=>{this.deleteComment(eachComment)}}> Delete </Button>}
+                            </Card.Body>
+                        </Card>
+                        )}
+                    </div>
+                )
+            } else {
+                commentSection = (
+                    <h1> No Comments </h1>
+                )
+            }   
         }
 
         return(
@@ -254,6 +261,7 @@ export default class Book extends React.Component {
                     </form>
                     <hr />
                     {commentSection}
+                    <div style={{marginBottom:"100px"}}> </div>
                 </div>
             </Container>
             

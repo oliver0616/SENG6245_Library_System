@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Container, Form} from 'react-bootstrap';
 
 import {editBook, uploadBookCover, uploadBookPdf} from "../api/BookApi";
+import { store } from 'react-notifications-component';
 
 export default class EditBook extends React.Component {
     constructor() {
@@ -56,6 +57,19 @@ export default class EditBook extends React.Component {
             if (uploadBookPdfFlag) {
                 uploadBookPdf(bookPdfFormData);
             }
+            store.addNotification({
+                title: "Success!",
+                message: "Edited Book Successfully",
+                type: "success",
+                insert: "bottom",
+                container: "bottom-right",
+                animationIn: ["animate__animated", "animate__fadeIn"],
+                animationOut: ["animate__animated", "animate__fadeOut"],
+                dismiss: {
+                  duration: 5000,
+                  onScreen: true
+                }
+            });
         });
         // Print out items in formData
         // for (var key of formData.entries()) {

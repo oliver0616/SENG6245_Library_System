@@ -15,7 +15,7 @@ router.post('/checkLikeBook', (req, res) => {
             res.json({"liked":true});
         }
     }).catch(err =>{
-        console.log(err);
+        return res.status(500).send({ msg: "Error occured check liked book by book id" });
     });
 });
 
@@ -25,7 +25,7 @@ router.post('/getLikeHistory', (req, res) => {
     db.any('SELECT "Book".bookid, "Book".name, "UserLikedHistory".timestamp FROM public."Book" LEFT JOIN public."UserLikedHistory" ON "Book".bookid = "UserLikedHistory".bookid WHERE "UserLikedHistory".userid = $1 ORDER BY timestamp DESC' ,[req.body.userId]).then(dbRes => {
         res.json(dbRes)
     }).catch(err => {
-        console.log(err);
+        return res.status(500).send({ msg: "Error occured get liked history" });
     });
 });
 
@@ -37,7 +37,7 @@ router.post('/likeBook', (req, res) => {
     {
         res.json({"successLiked":true});
     }).catch(err =>{
-        console.log(err);
+        return res.status(500).send({ msg: "Error occured like book" });
     });
 });
 
@@ -48,7 +48,7 @@ router.post('/removeLikeBook', (req, res) => {
         {
             res.json({"successRemoveLike":true});
         }).catch(err =>{
-            console.log(err);
+            return res.status(500).send({ msg: "Error occured remove like" });
         });
 });
 
@@ -61,7 +61,7 @@ router.post('/addDownloadHistory', (req, res) => {
     {
         res.json({"successLiked":true});
     }).catch(err =>{
-        console.log(err);
+        return res.status(500).send({ msg: "Error occured add download history" });
     });
 
 });
@@ -72,7 +72,7 @@ router.post('/getDownloadHistory', (req, res) => {
     db.any('SELECT "Book".bookid, "Book".name, "UserDownloadHistory".timestamp FROM public."Book" LEFT JOIN public."UserDownloadHistory" ON "Book".bookid = "UserDownloadHistory".bookid WHERE "UserDownloadHistory".userid = $1 ORDER BY timestamp DESC', [req.body.userId]).then(dbRes => {
         res.json(dbRes);
     }).catch(err => {
-        console.log(err);
+        return res.status(500).send({ msg: "Error occured get download history" });
     });
 });
 

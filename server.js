@@ -11,7 +11,6 @@ const user = require("./routes/user");
 const history = require("./routes/history");
 const search = require("./routes/search");
 const issue = require("./routes/issue");
-const test = require("./routes/test");
 
 var app = express();
 
@@ -60,7 +59,6 @@ app.use("/api/user", user);
 app.use("/api/history", history);
 app.use("/api/search", search);
 app.use("/api/issue", issue);
-app.use("/api/test", test);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server up and running on port ${port} !`));

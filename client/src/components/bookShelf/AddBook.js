@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Container, Form} from 'react-bootstrap';
 
 import {addNewBook, uploadBookCover, uploadBookPdf} from '../api/BookApi';
+import { store } from 'react-notifications-component';
 
 export default class AddBook extends React.Component {
 
@@ -29,6 +30,20 @@ export default class AddBook extends React.Component {
             bookPdfFormData.append("bookId", res.data.currentBookId);
             uploadBookCover(bookCoverFormData);
             uploadBookPdf(bookPdfFormData);
+            store.addNotification({
+                title: "Success!",
+                message: "Added Book",
+                type: "success",
+                insert: "bottom",
+                container: "bottom-right",
+                animationIn: ["animate__animated", "animate__fadeIn"],
+                animationOut: ["animate__animated", "animate__fadeOut"],
+                dismiss: {
+                  duration: 5000,
+                  onScreen: true
+                }
+            });
+            document.getElementById("addBookForm").reset();
         });
         // Print out items in formData
         //   for (var key of formData.entries()) {
@@ -40,7 +55,7 @@ export default class AddBook extends React.Component {
         return(
             <Container className="container-addBook">
                 <h1 style={{margin:"25px"}}>Add New Book</h1>
-                <form onSubmit={this.onSubmit}>
+                <form onSubmit={this.onSubmit} id="addBookForm">
                     <Form.Group>
                         <p style={{color:"red"}}> {this.state.warningMessage} </p>
                         <Form.Label>Book Name</Form.Label>
