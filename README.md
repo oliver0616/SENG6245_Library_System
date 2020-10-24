@@ -6,6 +6,8 @@ Frontend: <br />
 react, react-bootstrap, axios <br />
 Backend: <br />
 nodejs, express
+Database: <br />
+Postgresql
 
 ## How to setup the system
 1. Clone this repository
