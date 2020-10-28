@@ -55,6 +55,11 @@ export function addNewBook(bookData) {
     return axios.post("/api/book/addNewBook", bookData);
 }
 
+// delete book
+export function deleteBookById(bookData) {
+    return axios.post("/api/book/deleteBookById", bookData);
+}
+
 // Upload book cover image
 export function uploadBookCover(bookData) {
     return axios.post("/api/book/uploadBookCover", bookData);

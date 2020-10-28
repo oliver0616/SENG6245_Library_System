@@ -1,7 +1,8 @@
 import React from 'react';
-import { Button, Container, Form} from 'react-bootstrap';
+import { Button, Container, Form, Modal} from 'react-bootstrap';
+import { Link } from "react-router-dom";
 
-import {editBook, uploadBookCover, uploadBookPdf} from "../api/BookApi";
+import {editBook, uploadBookCover, uploadBookPdf, deleteBookById} from "../api/BookApi";
 import { store } from 'react-notifications-component';
 
 export default class EditBook extends React.Component {
@@ -9,7 +10,8 @@ export default class EditBook extends React.Component {
         super()
         this.state = {
             book:{},
-            refresh: false
+            refresh: false,
+            showDeleteWarning: false
         }
     }
     componentDidMount() {
@@ -23,6 +25,27 @@ export default class EditBook extends React.Component {
                 book: this.props.location.book
             })
         }
+    }
+
+    // This method open delete book warning model
+    handleWarningOpen() {
+        this.setState({
+            showDeleteWarning:true
+        })
+    }
+
+    // This method close delete book warning model
+    handleWarningClose = e => {
+        this.setState({
+            showDeleteWarning:false
+        })
+    }
+
+
+    deleteBook = e => {
+        deleteBookById({bookId:this.state.book.bookid}).then(res => {
+            this.props.history.push("/bookshelf");
+        })
     }
 
     onSubmit = e => {
@@ -78,8 +101,11 @@ export default class EditBook extends React.Component {
     }
 
     render() {
+
         return(
             <Container className="container-addBook">
+                <Link to={`/book/${this.state.book.bookid}`} style={{float:"left"}}> Go back to book </Link>
+                <br />
                 <h1 style={{margin:"25px"}}>Edit Book</h1>
                 <form onSubmit={this.onSubmit}>
                     <Form.Group>
@@ -127,10 +153,27 @@ export default class EditBook extends React.Component {
                     <Form.Group>
                         <Form.File id="pdfFile" label="Upload Book PDF" />
                     </Form.Group>
+                    <Button size="lg" onClick={() => {this.handleWarningOpen()}}>
+                        Delete Book
+                    </Button>
                     <Button size="lg" type="submit">
                         Submit
                     </Button>
                 </form>
+                <Modal show={this.state.showDeleteWarning} onHide={this.handleWarningClose}>
+                    <Modal.Header closeButton>
+                    <Modal.Title>Warning</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>You are about to delete this book!!! Are you sure you want to do this?</Modal.Body>
+                    <Modal.Footer>
+                    <Button variant="secondary" onClick={this.handleWarningClose}>
+                        No
+                    </Button>
+                    <Button variant="primary" onClick={this.deleteBook}>
+                        Yes
+                    </Button>
+                    </Modal.Footer>
+                </Modal>
             </Container>
         )
     }

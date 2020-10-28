@@ -41,6 +41,14 @@ router.post('/addNewBook', (req, res) => {
     });
 });
 
+// Description: delete the book by book id
+// Route: Post /api/book/deleteBookById
+router.post('/deleteBookById', (req, res) => {
+    db.any('DELETE FROM public."Book" WHERE bookid = $1', [req.body.bookId]).then(bookId => {
+        res.json({"msg":"Book Deleted Successfully"});
+    });
+});
+
 // Description: upload book cover
 // Route: Post /api/book/uploadBookCover
 router.post('/uploadBookCover', (req, res) => { 
