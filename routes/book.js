@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 const db = require('../config/database');
 
+
+// ------------------------------------------------------------------
+// Book
 // Description: Get all books from database
 // Route: POST /api/book/getAllBooks
 router.post('/getAllBooks', (req, res) => {
@@ -86,7 +89,8 @@ router.post('/editBook', (req, res) => {
     })
 });
 
-
+// ------------------------------------------------------------------
+// Comment
 // Description: add a new comment into db
 // Route: Post /api/book/addComment
 router.post('/addComment', (req, res) => {
