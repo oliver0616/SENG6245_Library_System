@@ -115,7 +115,6 @@ router.post('/getBookCommentById', (req, res) => {
 // Description: delete comment by comment id
 // Route: Post /api/book/deleteCommentById
 router.post('/deleteCommentById', (req, res) => {
-    console.log(req.body);
     db.any('DELETE FROM public."Comment" WHERE commentid = $1', [req.body.commentId]).then(
         res.json({msg: "comment deleted"})
     ).catch(err => {
