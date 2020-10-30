@@ -29,8 +29,6 @@ if (env === "production") {
 }
 
 
-
-
 const db = pgp(cn);
 
 module.exports = db;
