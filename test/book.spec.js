@@ -1,5 +1,4 @@
 // test/book.spec.js
-const book = require('../routes/book');
 var request = require('request');
 const chai = require('chai');
 var assert = chai.assert;    // Using Assert style
@@ -32,7 +31,6 @@ describe('Testing book controller', function(){
         db.any('DELETE FROM public."Comment"');
         // Clean up User Table
         db.any('DELETE FROM public."User"');
-
     });
 
     // addNewBook
@@ -135,6 +133,7 @@ describe('Testing book controller', function(){
             done();
         });
     });
+
 });
 
 //downloadBookById, uploadBookCover, uploadBookPdf
