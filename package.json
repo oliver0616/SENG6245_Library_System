@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./server.js",
+    "start": "set NODE_ENV=production&& nodemon ./server.js",
+    "start-test": "set NODE_ENV=test&& nodemon ./server.js",
     "test": "mocha ./test"
   },
   "dependencies": {

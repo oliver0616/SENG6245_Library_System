@@ -1,25 +1,35 @@
 // PostgreSQL library
 const pgp = require('pg-promise')(/*option*/)
 
-// Production
-const cn = {
-    host: 'localhost', // 'localhost' is the default;
-    port: 5432, // 5432 is the default;
-    database: 'libraryDB',
-    user: 'admin',
-    password: 'Pa$$w0rd'
-    //     password: '3DwR^4Sy#&'
-};
+var env = process.env.NODE_ENV
+var cn = null;
 
-// Testing
-// const cn = {
-//     host: 'localhost', // 'localhost' is the default;
-//     port: 5432, // 5432 is the default;
-//     database: 'libraryDBTesting',
-//     user: 'admin',
-//     password: 'Pa$$w0rd'
-//     //     password: '3DwR^4Sy#&'
-// };
+if (env === "production") {
+    console.log("this is production database");
+    // Production
+    cn = {
+        host: 'localhost', // 'localhost' is the default;
+        port: 5432, // 5432 is the default;
+        database: 'libraryDB',
+        user: 'admin',
+        password: 'Pa$$w0rd'
+        //     password: '3DwR^4Sy#&'
+    };
+} else if (env === "test") {
+    console.log("this is testing database");
+    // Testing
+    cn = {
+        host: 'localhost', // 'localhost' is the default;
+        port: 5432, // 5432 is the default;
+        database: 'libraryDBTesting',
+        user: 'admin',
+        password: 'Pa$$w0rd'
+        //     password: '3DwR^4Sy#&'
+    };
+}
+
+
+
 
 const db = pgp(cn);
 
