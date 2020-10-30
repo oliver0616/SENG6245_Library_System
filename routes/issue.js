@@ -6,7 +6,7 @@ const db = require('../config/database');
 // Route: POST /api/issue/submitIssue
 router.post('/submitIssue', (req, res) => {
     db.any('INSERT INTO public."IssueForm" Values (default,$1,$2,$3,$4)', [req.body.userId,req.body.title,req.body.description,req.body.priority])
-    .then(res.json({"message": "issue has been submitted"}));
+    .then(res.json({"msg": "issue has been submitted"}));
 });
 
 // Description: Get all issues
@@ -20,9 +20,8 @@ router.post('/getAllIssues', (req, res) => {
 // Description: delete the issue given the issueid
 // Route: POST /api/issue/deleteIssue
 router.post('/deleteIssue', (req, res) => {
-    console.log(req.body);
     db.any('DELETE FROM public."IssueForm" WHERE issueid = $1',[req.body.issueId]).then(
-        res.json({message: "Issue Deleted"})
+        res.json({msg: "Issue Deleted"})
     )
 });
 
