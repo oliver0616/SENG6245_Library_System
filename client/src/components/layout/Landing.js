@@ -11,7 +11,7 @@ export default class Landing extends React.Component {
                 <div className="button-container-landing">
                     <Button href="./login" size="lg" variant="light">Login</Button>
                     <hr/> <hr/> <hr/>
-                    <Button href="./register" size="lg" variant="light">Register</Button>
+                    <Button href="./signup" size="lg" variant="light">Register</Button>
                 </div>
         </Container>
       </div>
