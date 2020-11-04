@@ -2,23 +2,25 @@
 var request = require('request');
 const chai = require('chai');
 var assert = chai.assert;    // Using Assert style
-const db = require('../config/database');
+const db = require('./testDatabase');
 
 const issueApiAddress = "http://localhost:5000/api/issue";
 
 describe('Testing issue controller', function(){
 
-    before('Fire up', function() {
+    before('Fire up', function(done) {
         // Add dummy issue data
         db.any('INSERT INTO public."IssueForm" Values ($1, $2, $3, $4, $5)', [2, 1, "test issue title1", "this is a test issue data1", 1]);
         db.any('INSERT INTO public."IssueForm" Values ($1, $2, $3, $4, $5)', [3, 1, "test issue title2", "this is a test issue data2", 2]);
         db.any('INSERT INTO public."IssueForm" Values ($1, $2, $3, $4, $5)', [4, 1, "test issue title3", "this is a test issue data3", 3]);
+        done();
     });
 
-    after('Clean up', function() {
+    after('Clean up', function(done) {
         // Clean up Issue Table
         db.any('ALTER SEQUENCE "IssueForm_issueid_seq" RESTART');
         db.any('DELETE FROM public."IssueForm"');
+        done();
     });
 
     // submitIssue

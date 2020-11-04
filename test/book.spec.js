@@ -2,13 +2,13 @@
 var request = require('request');
 const chai = require('chai');
 var assert = chai.assert;    // Using Assert style
-const db = require('../config/database');
+const db = require('./testDatabase');
 
 const bookApiAddress = "http://localhost:5000/api/book";
 
 describe('Testing book controller', function(){
 
-    before('Fire up', function() {
+    before('Fire up', function(done) {
         // Add dummy book data
         db.any('INSERT INTO public."Book" Values ($1, $2, $3, $4, $5, $6, $7)', [2, 'testBookName2', 'word1,word2,word3', 123456, 'testAuthorName2', '{}', 'this is the test book2']);
         db.any('INSERT INTO public."Book" Values ($1, $2, $3, $4, $5, $6, $7)', [3, 'testBookName3', 'word1,word2,word3', 123456, 'testAuthorName3', '{}', 'this is the test book3']);
@@ -19,10 +19,11 @@ describe('Testing book controller', function(){
         db.any('INSERT INTO public."Comment" Values ($1, $2, $3, $4, $5)',[2, 2, 1, 123456, "This is the test comment data"]);
         db.any('INSERT INTO public."Comment" Values ($1, $2, $3, $4, $5)',[3, 2, 1, 123456, "This is the test comment data2"]);
         // Add dummy user data
-        db.any('INSERT INTO public."User" Values ($1, $2, $3, $4, $5)', [1, "tester", "test@test.com", "$2a$10$n4gHEZbC6EHiZlsP9Z8Btui0ltPwVpRBB.onDAps1HT8k7UC1RNx2", "0"]);
+        db.any('INSERT INTO public."User" Values ($1, $2, $3, $4, $5)', [1, "tester", "testBook@test.com", "$2a$10$n4gHEZbC6EHiZlsP9Z8Btui0ltPwVpRBB.onDAps1HT8k7UC1RNx2", "0"]);
+        done();
     });
 
-    after('Clean up', function() {
+    after('Clean up', function(done) {
         // Clean up Book Table
         db.any('ALTER SEQUENCE "Book_bookid_seq" RESTART');
         db.any('DELETE FROM public."Book"');
@@ -31,6 +32,7 @@ describe('Testing book controller', function(){
         db.any('DELETE FROM public."Comment"');
         // Clean up User Table
         db.any('DELETE FROM public."User"');
+        done();
     });
 
     // addNewBook
