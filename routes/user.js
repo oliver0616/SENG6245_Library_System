@@ -30,7 +30,7 @@ router.post('/signup', (req, res) => {
                     newUser.password = hash;
                     db.any('INSERT INTO public."User" VALUES (default,$1,$2,$3,$4)', [newUser.name, newUser.email, newUser.password, newUser.role])
                     .then(
-                        res.status(200).json({message: "New user created"})
+                        res.status(200).json({msg: "New user created"})
                     ).catch(err => {
                         res.status(500).json({dbErr: "Database error occurred, please try again"})
                     });
@@ -100,8 +100,8 @@ router.post('/changePassword', (req, res) => {
         bcrypt.hash(req.body.newPassword, salt, (err, hash) =>
         {
             if(err) throw err;
-            db.many('UPDATE public."User" SET password = $1 WHERE userid = $2', [hash, req.body.userId])
-            .then(res.json({"message":"Password updated"}))
+            db.any('UPDATE public."User" SET password = $1 WHERE userid = $2', [hash, req.body.userId])
+            .then(res.status(200).json({"message":"Password updated"}))
             .catch(err => res.status(500).json({dbErr: "Database error occurred, please try again"}));
         });
     });
@@ -110,7 +110,7 @@ router.post('/changePassword', (req, res) => {
 // Description: delete current user
 // Route: POST /api/user/deleteAccount
 router.post('/deleteAccount', (req, res) => {
-    db.many('DELETE FROM public."User" WHERE userid = $1', [req.body.userId])
+    db.any('DELETE FROM public."User" WHERE userid = $1', [req.body.userId])
     .then( res.json({"message":"User deleted"}))
     .catch(err => res.status(500).json({dbErr: "Database error occurred, please try again"}));
 });
@@ -118,7 +118,7 @@ router.post('/deleteAccount', (req, res) => {
 // Description: list all user
 // Route: POST /api/user/listAllUser
 router.post('/listAllUser', (req, res) => {
-    db.many('SELECT userid,displayname,email,"Role".roleid,"Role".rolename FROM public."User" LEFT JOIN public."Role" ON "User".roleid = "Role".roleid ORDER BY userid')
+    db.any('SELECT userid,displayname,email,"Role".roleid,"Role".rolename FROM public."User" LEFT JOIN public."Role" ON "User".roleid = "Role".roleid ORDER BY userid')
     .then(dbRes => { res.json(dbRes)} )
 });
 

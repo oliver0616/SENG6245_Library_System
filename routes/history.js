@@ -85,7 +85,11 @@ router.post('/addUpdateViewHistory', (req, res) => {
     db.any('UPDATE public."UserBookHistory" SET timestamp = $1 WHERE userid = $2 AND bookid = $3 RETURNING timestamp', [currentTimestamp, req.body.userId, req.body.bookId]).then(dbRes => {
         if (dbRes.length === 0) {
             // Create new record
-            db.any('INSERT into public."UserBookHistory" ("userid", "bookid", "timestamp") VALUES ($1,$2,$3)', [req.body.userId, req.body.bookId, currentTimestamp])
+            db.any('INSERT into public."UserBookHistory" ("userid", "bookid", "timestamp") VALUES ($1,$2,$3)', [req.body.userId, req.body.bookId, currentTimestamp]).then(
+                res.json({msg: "Add new view record"})
+            )
+        } else {
+            res.json({msg: "Update view record"});
         }
     });
 });
