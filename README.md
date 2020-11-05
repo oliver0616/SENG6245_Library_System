@@ -9,17 +9,50 @@ nodejs, express <br />
 Database: <br />
 Postgresql <br />
 
-## How to setup the system
-1. Clone this repository
-2. Setup the database, by create a database name libraryDB and a user name admin, then use database/schema.sql file. This file will setup all the sequences and tables
-3. Open the command prompt/terminal in root directory and client directory
-4. run "npm install" for both command prompt/terminal
-5. run "npm start" for both command prompt/terminal
-6. the default frontend address is localhost:3000 and backend address is localhost:5000
-7. Access the site using the any browser
+## Require Packages
+1. Please download and install npm package manager first (https://www.npmjs.com/get-npm). The npm will also include the nodejs with it.
+2. Download the postgresql and install the PgAdmin with it (https://www.postgresql.org/download/).
+3. The rest of the packages would be download through npm, so just follow the setup the application section.
+
+## Setup the application
+Please clone the repository to a directory you like and follow the instructions below
+
+### Frontend
+1. Open a terminal in ./client directory
+2. Run "npm install" or "npm install --save"
+
+### Backend
+1. Open a terminal in ./ directory
+2. Run "npm install" or "npm install --save"
+
+### Database
+1. Open PgAdmin or psql terminal
+2. Setup a user name "admin" and password "Pa$$w0rd". (If you choose your own password, 
+please change the password in the following file: "./config/database.js", "./config/testDatabase.js")
+3. Setup two databases, one call "libraryDB", the other call "libraryDBTesting". First database is for development and the second one is for testing. (You can choose your own name for the databases, you will need to change the name in the following file: "./config/database.js", "./config/testDatabase.js)
+4. Run ./database/schema.sql in PgAdmin query tool or psql terminal. Make sure the script is ran for both databases.
+
+## Start the application
+The following section will walk through how to start the frontend and backend. Also how to run the test cases
+
+### Frontend
+1. Open a terminal in ./client directory
+2. Run "npm start"
+3. The frontend should be up and running at localhost:3000, access this address in any browser
+
+### Backend
+1. Open a terminal in ./ directory
+2. Run "npm start"
+3. The backend should be up and running at localhost:5000
+
+### Testing
+1. Open a terminal in ./ directory
+2. In this terminal run "npm run start-test"
+3. Open another terminal in ./ directory
+4. In second terminal run "npm test", to run through all the test cases
 
 ## Documentation
-Detail documentations are under documentation directory, detail for the code will be in it <br />
-Testing will include in test directory
+Detail documentations for codes are under doc directory <br />
+Test cases for both frontend and backend are under test directory <br />
 
 Setup React with Nodejs tutorial: https://www.codementor.io/@kakarganpat/how-to-setup-react-and-node-js-in-a-project-koxwqbssl
