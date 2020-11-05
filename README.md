@@ -10,7 +10,7 @@ Database: <br />
 Postgresql <br />
 
 ## Require Packages
-1. Please download and install npm package manager first (https://www.npmjs.com/get-npm). The npm will also include the nodejs with it.
+1. Please download and install npm package manager (https://www.npmjs.com/get-npm). It also contains nodejs.
 2. Download the postgresql and install the PgAdmin with it (https://www.postgresql.org/download/).
 3. The rest of the packages would be download through npm, so just follow the setup the application section.
 
