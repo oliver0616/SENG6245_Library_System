@@ -15,7 +15,3 @@ INSERT INTO public."Book"
 INSERT INTO public."Book"
     VALUES
         (4,'1984','Shakespeare,big brother,government',1604008186,'George Orwell','{}','Nineteen Eighty-Four: A Novel, often published as 1984, is a dystopian social science fiction novel by English novelist George Orwell. It was published on 8 June 1949 by Secker & Warburg as Orwells ninth and final book completed in his lifetime');
-
-
--- Admin
-INSERT INTO public."User" VALUES (0, 'admin', 'admin@admin.com','$2a$10$hoi22pp3KGEBNNW1Xf3FbOaXSndDYgSasPRP/MBEHDDVbx5irOIzS',1);

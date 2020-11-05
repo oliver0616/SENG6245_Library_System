@@ -197,3 +197,6 @@ ALTER TABLE public."Comment" OWNER TO admin;
     INSERT INTO public."Role"
     VALUES
         (1,'librarian');
+
+-- Libraian Admin Account
+INSERT INTO public."User" VALUES (0, 'admin', 'admin@admin.com','$2a$10$hoi22pp3KGEBNNW1Xf3FbOaXSndDYgSasPRP/MBEHDDVbx5irOIzS',1);
