@@ -12,10 +12,10 @@ describe('Testing history controller', function(){
         // Add dummy like book history data
         db.any('INSERT INTO public."UserLikedHistory" Values ($1, $2, $3)', [10, 10, 12345]);
         db.any('INSERT INTO public."UserLikedHistory" Values ($1, $2, $3)', [10, 13, 12345]);
-        // Add dummy download book history data
-        db.any('INSERT INTO public."UserDownloadHistory" Values ($1, $2, $3)', [10, 10, 12345]);
         // Add dummy view book history data
         db.any('INSERT INTO public."UserBookHistory" Values ($1, $2, $3)', [10, 10, 12345]);
+        // Add dummy download book history data
+        db.any('INSERT INTO public."UserDownloadHistory" Values ($1, $2, $3)', [10, 10, 12345]);
         // Add dummy user data
         db.any('INSERT INTO public."User" Values ($1, $2, $3, $4, $5)', [10, "tester", "testHistory@test.com", "$2a$10$n4gHEZbC6EHiZlsP9Z8Btui0ltPwVpRBB.onDAps1HT8k7UC1RNx2", "0"]);
         // Add dummy book data
