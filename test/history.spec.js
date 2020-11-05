@@ -2,7 +2,7 @@
 var request = require('request');
 const chai = require('chai');
 var assert = chai.assert;    // Using Assert style
-const db = require('./testDatabase');
+const db = require('../config/testDatabase');
 
 const historyApiAddress = "http://localhost:5000/api/history";
 
