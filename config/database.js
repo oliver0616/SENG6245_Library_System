@@ -13,7 +13,6 @@ if (env === "production") {
         database: 'libraryDB',
         user: 'admin',
         password: 'Pa$$w0rd'
-        //     password: '3DwR^4Sy#&'
     };
 } else if (env === "test") {
     console.log("this is testing database");
@@ -24,7 +23,6 @@ if (env === "production") {
         database: 'libraryDBTesting',
         user: 'admin',
         password: 'Pa$$w0rd'
-        //     password: '3DwR^4Sy#&'
     };
 }
 

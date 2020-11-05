@@ -8,7 +8,6 @@ const cn = {
     database: 'libraryDBTesting',
     user: 'admin',
     password: 'Pa$$w0rd'
-    //     password: '3DwR^4Sy#&'
 };
 
 
