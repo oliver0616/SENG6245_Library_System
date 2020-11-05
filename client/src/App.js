@@ -8,6 +8,7 @@ import ReactNotification from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
 
 import PrivateRoute from "./components/common/PrivateRoute";
+import LibrarianRoute from "./components/common/LibrarianRoute";
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import SignupLibrarian from "./components/auth/SignupLibrarian";
@@ -56,16 +57,16 @@ class App extends Component
         <Navigation />
         <PrivateRoute exact path="/bookshelf" component={BookShelf} />
         <PrivateRoute exact path="/book/:id" component={Book} />
-        <PrivateRoute exact path="/editbook/:id" component={EditBook} />
-        <PrivateRoute exact path="/addbook" component={AddBook} />
+        <LibrarianRoute exact path="/editbook/:id" component={EditBook} />
+        <LibrarianRoute exact path="/addbook" component={AddBook} />
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
-        <PrivateRoute exact path="/alluser" component={AllUser} />
+        <LibrarianRoute exact path="/alluser" component={AllUser} />
         <PrivateRoute exact path="/searchpage" component={SearchPage} />
         <PrivateRoute exact path="/changepassword" component={ChangePassword} />
-        <PrivateRoute exact path="/signuplibrarian" component={SignupLibrarian} />
+        <LibrarianRoute exact path="/signuplibrarian" component={SignupLibrarian} />
         <PrivateRoute exact path="/issueform" component={IssueForm} />
-        <PrivateRoute exact path="/allissues" component={AllIssues} />
-        <PrivateRoute exact path="/issuedetail/:id" component={IssueDetail} />
+        <LibrarianRoute exact path="/allissues" component={AllIssues} />
+        <LibrarianRoute exact path="/issuedetail/:id" component={IssueDetail} />
       </div>
     )
     

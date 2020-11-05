@@ -14,7 +14,6 @@ export default class IssueDetail extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props.location.state.issueDetail);
         if (this.props.location.state.issueDetail !== undefined) {
             this.setState({
                 issue: this.props.location.state.issueDetail
