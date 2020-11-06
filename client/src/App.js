@@ -51,22 +51,33 @@ if (localStorage.jwtToken)
 class App extends Component
 {
   render() {
+    const LibrarianAccess = () => (
+      <div>
+        <LibrarianRoute exact path="/editbook/:id" component={EditBook} />
+        <LibrarianRoute exact path="/addbook" component={AddBook} />
+        <LibrarianRoute exact path="/alluser" component={AllUser} />
+        <LibrarianRoute exact path="/signuplibrarian" component={SignupLibrarian} />
+        <LibrarianRoute exact path="/allissues" component={AllIssues} />
+        <LibrarianRoute exact path="/issuedetail/:id" component={IssueDetail} />
+      </div>
+    )
+
     const withNavBar = () => (
       <div>
         <ReactNotification />
         <Navigation />
         <PrivateRoute exact path="/bookshelf" component={BookShelf} />
         <PrivateRoute exact path="/book/:id" component={Book} />
-        <LibrarianRoute exact path="/editbook/:id" component={EditBook} />
-        <LibrarianRoute exact path="/addbook" component={AddBook} />
+        <PrivateRoute exact path="/editbook/:id" component={LibrarianAccess} />
+        <PrivateRoute exact path="/addbook" component={LibrarianAccess} />
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
-        <LibrarianRoute exact path="/alluser" component={AllUser} />
+        <PrivateRoute exact path="/alluser" component={LibrarianAccess} />
         <PrivateRoute exact path="/searchpage" component={SearchPage} />
         <PrivateRoute exact path="/changepassword" component={ChangePassword} />
-        <LibrarianRoute exact path="/signuplibrarian" component={SignupLibrarian} />
+        <PrivateRoute exact path="/signuplibrarian" component={LibrarianAccess} />
         <PrivateRoute exact path="/issueform" component={IssueForm} />
-        <LibrarianRoute exact path="/allissues" component={AllIssues} />
-        <LibrarianRoute exact path="/issuedetail/:id" component={IssueDetail} />
+        <PrivateRoute exact path="/allissues" component={LibrarianAccess} />
+        <PrivateRoute exact path="/issuedetail/:id" component={LibrarianAccess} />
       </div>
     )
     
