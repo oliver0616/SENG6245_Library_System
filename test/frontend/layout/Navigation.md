@@ -1,5 +1,5 @@
 # Navigation Bar Testing
-This component provide the simple search, navigate to Bookshlef, Dashboard and logout function
+This component provide the simple search, navigate to Bookshelf, Dashboard and logout function
 
 ## Test cases
 ### Test case 1

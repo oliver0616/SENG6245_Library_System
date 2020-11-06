@@ -1,5 +1,5 @@
 # Landing Page Testing
-This component control librarian access only pages. If user is not librarian it will reirect them to dashboard page
+This component control librarian access only pages. If user is not librarian it will redirect them to dashboard page
 
 ## Test cases
 ### Test case 1
