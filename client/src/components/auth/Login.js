@@ -57,7 +57,8 @@ export default class Login extends React.Component {
                                 style = {{backgroundColor:"	#FFFFFF"}}
                                 id = "email"
                                 type="email" 
-                                placeholder="Enter email" 
+                                placeholder="Enter email"
+                                required
                             />
                         </Form.Group>
 
@@ -67,7 +68,9 @@ export default class Login extends React.Component {
                                 style = {{backgroundColor:"	#FFFFFF"}}
                                 id = "password"
                                 type="password" 
-                                placeholder="Password" />
+                                placeholder="Password" 
+                                required
+                            />
                         </Form.Group>
                         <Form.Group>
                             <Link to="/signup">Register</Link>

@@ -63,7 +63,8 @@ export default class AddBook extends React.Component {
                             style = {{backgroundColor:"	#FFFFFF"}}
                             id = "bookName"
                             type="text" 
-                            placeholder="Enter Book Name" 
+                            placeholder="Enter Book Name"
+                            required
                         />
                     </Form.Group>
                     <Form.Group>
@@ -73,6 +74,7 @@ export default class AddBook extends React.Component {
                             id = "authorName"
                             type="text" 
                             placeholder="Enter Author Name" 
+                            required
                         />
                     </Form.Group>
                     <Form.Group>
@@ -82,6 +84,7 @@ export default class AddBook extends React.Component {
                             id = "keywords"
                             type="text" 
                             placeholder="Ex. Apple, Banana, Child" 
+                            required
                         />
                     </Form.Group>
                     <Form.Group>
@@ -90,6 +93,7 @@ export default class AddBook extends React.Component {
                             as="textarea" 
                             rows="3" 
                             id = "description"
+                            required
                         />
                     </Form.Group>
                     <Form.Group>

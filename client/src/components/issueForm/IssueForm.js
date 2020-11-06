@@ -65,6 +65,7 @@ export default class IssueForm extends React.Component {
                             id = "title"
                             type="text" 
                             placeholder="Enter Short Description of the Issue" 
+                            required
                         />
                     </Form.Group>
                     <Form.Group>
@@ -86,6 +87,7 @@ export default class IssueForm extends React.Component {
                             as="textarea" 
                             rows="3" 
                             id = "description"
+                            required
                         />
                     </Form.Group>
                     <Button size="lg" type="submit">
