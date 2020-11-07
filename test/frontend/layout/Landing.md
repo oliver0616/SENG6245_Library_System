@@ -1,5 +1,5 @@
 # Landing Page Testing
-This component handle login and signup redirection <br />
+This component handle login and signup redirection
 
 ## Test cases
 ### Test case 1
