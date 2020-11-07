@@ -116,6 +116,7 @@ export default class EditBook extends React.Component {
                             id = "bookName"
                             type="text" 
                             defaultValue={this.state.book.name}
+                            required
                         />
                     </Form.Group>
                     <Form.Group>
@@ -125,6 +126,7 @@ export default class EditBook extends React.Component {
                             id = "authorName"
                             type="text" 
                             defaultValue={this.state.book.author}
+                            required
                         />
                     </Form.Group>
                     <Form.Group>
@@ -134,6 +136,7 @@ export default class EditBook extends React.Component {
                             id = "keywords"
                             type="text" 
                             defaultValue={this.state.book.keywords}
+                            required
                         />
                     </Form.Group>
                     <Form.Group>
@@ -143,17 +146,18 @@ export default class EditBook extends React.Component {
                             rows="3" 
                             id = "description"
                             defaultValue={this.state.book.description}
+                            required
                         />
                     </Form.Group>
                     <hr />
                     <p> Use these to replace previous pdf file and book cover </p>
                     <Form.Group>
-                        <Form.File id="bookCover" label="Upload Book Cover" />
+                        <Form.File id="bookCover" label="Upload Book Cover" required/>
                     </Form.Group>
                     <Form.Group>
-                        <Form.File id="pdfFile" label="Upload Book PDF" />
+                        <Form.File id="pdfFile" label="Upload Book PDF" required/>
                     </Form.Group>
-                    <Button size="lg" onClick={() => {this.handleWarningOpen()}}>
+                    <Button size="lg" style = {{marginRight:"10px"}} onClick={() => {this.handleWarningOpen()}}>
                         Delete Book
                     </Button>
                     <Button size="lg" type="submit">

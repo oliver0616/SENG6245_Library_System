@@ -97,10 +97,10 @@ export default class AddBook extends React.Component {
                         />
                     </Form.Group>
                     <Form.Group>
-                        <Form.File id="bookCover" label="Upload Book Cover" />
+                        <Form.File id="bookCover" label="Upload Book Cover" required/>
                     </Form.Group>
                     <Form.Group>
-                        <Form.File id="pdfFile" label="Upload Book PDF" />
+                        <Form.File id="pdfFile" label="Upload Book PDF" required/>
                     </Form.Group>
                     <Button size="lg" type="submit">
                         Submit
